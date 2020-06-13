@@ -1,11 +1,16 @@
 <template>
-  <ValidationProvider :vid="vid" :name="$attrs.label" :rules="rules" v-slot="{ errors, valid }">
+  <ValidationProvider
+    v-slot="{ errors, valid }"
+    :vid="vid"
+    :name="$attrs.label"
+    :rules="rules"
+  >
     <b-field
       v-bind="$attrs"
       :type="{ 'is-danger': errors[0], 'is-success': valid }"
       :message="errors"
     >
-      <b-select placeholder="Select a subject" v-model="innerValue">
+      <b-select v-model="innerValue" placeholder="Select a subject">
         <slot />
       </b-select>
     </b-field>
@@ -53,5 +58,5 @@ export default {
       this.innerValue = this.value
     }
   }
-};
+}
 </script>

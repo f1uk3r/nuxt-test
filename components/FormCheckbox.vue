@@ -1,8 +1,14 @@
 <template>
-  <ValidationProvider :name="$attrs.label" :rules="rules" v-slot="{ errors}">
+  <ValidationProvider
+    v-slot="{ errors }"
+    :name="$attrs.label"
+    :rules="rules"
+  >
     <div class="block">
       <slot />
-      <p class="has-text-danger"></p>
+      <p class="has-text-danger">
+        {{ errors[0] }}
+      </p>
     </div>
   </ValidationProvider>
 </template>
