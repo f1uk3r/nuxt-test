@@ -2,9 +2,220 @@
   <div class="academic-form">
     <div class="relative-container">
       <div class="whole-form">
-        <b-progress type="is-info" :value="progressValue" format="percent" />
         <form action="post">
-          <div v-if="step === 1" class="form-field">
+          <b-steps v-model="step">
+            <b-step-item
+              step="1"
+              label="Subject"
+            >
+              <h1 class="title has-text-centered">Account</h1>
+              <div class="field">
+                <p class="has-text-left is-size-4">
+                  Which of the subject(s) does the student need help with?
+                </p>
+                <form-checkbox
+                  rules="required"
+                  name="subjects"
+                  label="Subject"
+                >
+                  <template v-for="(item,i) in subjectListFinal">
+                    <b-checkbox
+                      :key="`${i}-${item}`"
+                      v-model="form.subjects"
+                      :native-value="item"
+                      size="is-medium"
+                    >
+                      {{ item }}
+                    </b-checkbox>
+                    <br :key="`${i}-${item.id}`">
+                  </template>
+                </form-checkbox>
+              </div>
+            </b-step-item>
+            <b-step-item
+              step="2"
+              label="Preference"
+            >
+              <form-dropdown
+                v-if="form.standard!=='pre-primary'"
+                ref="board"
+                v-model="form.board"
+                label="Which board is the student's school affiliated to?"
+                rules="required"
+              >
+                <option value>Select a Board</option>
+                <option
+                  v-for="(item, i) in boardArray"
+                  :key="`${item.value}-${i}`"
+                  :value="item.value"
+                >
+                  {{ item.text }}
+                </option>
+              </form-dropdown>
+
+              <form-dropdown
+                ref="genderPreference"
+                v-model="form.gender_preference"
+                label="Do student have a gender preference for the tutor?"
+                rules="required"
+              >
+                <option value>Select an option</option>
+                <option
+                  v-for="(item, i) in genderPreferenceArray"
+                  :key="`${item.value}-${i}`"
+                  :value="item.value"
+                >
+                  {{ item.text }}
+                </option>
+              </form-dropdown>
+
+              <div class="field">
+                <p class="has-text-left is-size-4">
+                  Which of the days would you prefer to take the classes?
+                </p>
+                <form-checkbox
+                  rules="required"
+                  label="daysRaw"
+                >
+                  <template v-for="(item,i) in daysArray">
+                    <b-radio
+                      :key="`${i}-${item.value}`"
+                      v-model="daysRaw"
+                      :native-value="item.value"
+                      size="is-medium"
+                    >
+                      {{ item.text }}
+                    </b-radio>
+                    <br :key="`${i}-${item.id}`">
+                  </template>
+                </form-checkbox>
+              </div>
+
+              <div v-if="daysRaw==='custom'" class="field">
+                <form-checkbox
+                  rules="required"
+                  label="Days"
+                >
+                  <template v-for="(item,i) in customDaysArray">
+                    <b-checkbox
+                      :key="`${i}-${item}`"
+                      v-model="form.days"
+                      :native-value="item"
+                      size="is-medium"
+                    >
+                      {{ item }}
+                    </b-checkbox>
+                    <br :key="`${i}-${item.id}`">
+                  </template>
+                </form-checkbox>
+              </div>
+            </b-step-item>
+            <b-step-item
+              step="3"
+              label="Personal Information"
+            >
+              <form-input
+                key="name"
+                v-model="form.name"
+                vid="name"
+                type="text"
+                label="Name"
+                rules="required"
+                placeholder="Enter your name"
+              />
+
+              <form-input
+                key="contact"
+                v-model="form.contact"
+                vid="contact"
+                type="tel"
+                label="Contact(Mobile) Number"
+                rules="{required: true, regex: /^[5-9]\d{9}$/}"
+                placeholder="Please enter 10 digit mobile number"
+              />
+
+              <form-input
+                key="email"
+                v-model="form.email"
+                vid="email"
+                type="email"
+                label="E-mail"
+                rules="required|email"
+                placeholder="E-mail"
+              />
+            </b-step-item>
+            <b-step-item
+              step="4"
+              label="Location"
+            >
+              <!--<div class="field">
+                <label class="label has-text-left" for="location">Your locality</label>
+                <div class="control">
+                  <input
+                    id="location"
+                    ref="location"
+                    key="location"
+                    v-model="form.location"
+                    v-validate="'required'"
+                    type="text"
+                    name="location"
+                    placeholder="eg. Heerapura"
+                    class="input"
+                    :class="{'is-danger': errors.first('location'), 'is-success': !errors.first('location') && form.location && form.location!==''}"
+                  >
+                </div>
+                <p
+                  v-show="errors.first('location')"
+                  class="help has-text-left danger"
+                >
+                  {{ errors.first('location') }}
+                </p>
+              </div>-->
+
+              <form-input
+                key="address"
+                v-model="form.address"
+                vid="address"
+                type="textarea"
+                label="Address"
+                rules="required|min:10"
+                placeholder="Enter your postal address"
+              />
+
+              <form-input
+                key="landmark"
+                v-model="form.landmark"
+                vid="landmark"
+                type="text"
+                label="Landmark"
+                rules="required"
+                placeholder="Enter your Landmark"
+              />
+            </b-step-item>
+            <template slot="navigation" slot-scope="{previous, next}">
+              <b-button
+                outlined
+                type="is-info"
+                icon-pack="fas"
+                icon-left="backward"
+                :disabled="previous.disabled"
+                @click.prevent="previous.action"
+              >
+                Previous
+              </b-button>
+              <b-button
+                outlined
+                type="is-info"
+                icon-pack="fas"
+                icon-right="forward"
+                :disabled="next.disabled"
+                @click.prevent="next.action"
+              >
+                Next
+              </b-button>
+            </template>
+          </b-steps>
+          <!--<div v-if="step === 1" class="form-field">
             <div class="field">
               <p class="has-text-left is-size-4">
                 Which of the subject(s) does the student need help with?
@@ -147,7 +358,7 @@
               label="E-mail"
               rules="required|email"
               placeholder="E-mail"
-            />\
+            />
           </div>
           <div v-if="step === 4" class="form-field">
             <p>Your Location</p>
@@ -203,10 +414,10 @@
             <p>Our team will try to contact you as soon as possible!</p>
             <p>Got a minute? Show us some love!</p>
             <p>Follow us on <a href="https://twitter.com/edhusk_com">Twitter</a> and like us on <a href="https://www.facebook.com/edhuskindia/">Facebook</a>.</p>
-          </div>
+          </div>-->
         </form>
 
-        <div class="field is-grouped">
+        <!--<div class="field is-grouped">
           <button
             v-show="step===2 || step===3 || step===4"
             class="button is-link"
@@ -228,7 +439,7 @@
           >
             Submit
           </button>
-        </div>
+        </div>-->
       </div>
     </div>
   </div>
@@ -238,7 +449,6 @@
 import FormDropdown from './FormDropdown.vue'
 import FormInput from './FormInput.vue'
 import FormCheckbox from './FormCheckbox.vue'
-// import FormRadio from './FormRadio.vue'
 
 export default {
   name: 'QueryAcademicForm',
@@ -246,7 +456,6 @@ export default {
     FormDropdown,
     FormInput,
     FormCheckbox
-    // FormRadio
   },
   props: {},
   data () {
@@ -446,7 +655,7 @@ export default {
   }, */
   methods: {
     /* addToInstance method is corrosponding to checkbox component */
-    addToDaysInstance (e) {
+    /* addToDaysInstance (e) {
       this.daysRaw = e
       if (this.daysRaw === 'custom') {
         this.form.days = []
@@ -458,7 +667,7 @@ export default {
       } else {
         this.form.days.splice(this.form.days.indexOf(e), 1)
       }
-    },
+    }, */
     prev () {
       this.progressValue -= 25
       this.step--
@@ -584,7 +793,7 @@ export default {
   form {
     padding: 10px;
     overflow-y: scroll;
-    height: 80%;
+    height: 100%;
   }
   div.progress-wrapper {
     padding: 10px 10px 0 10px;
@@ -592,12 +801,12 @@ export default {
   form>div.form-field>div.field>p {
     padding-bottom: 15px;
   }
-  div.whole-form > div.field.is-grouped {
+/*  div.whole-form > div.field.is-grouped {
     position: absolute;
     bottom: 10px;
     padding: 10px;
   }
   div.whole-form > div.field.is-grouped > button.button {
     margin: 5px;
-  }
+  }*/
 </style>
