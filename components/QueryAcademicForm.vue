@@ -6,7 +6,7 @@
         <form action="post">
           <div v-if="step === 1" class="form-field">
             <div class="field">
-              <!--<p class="has-text-left is-size-4">
+              <p class="has-text-left is-size-4">
                 Which of the subject(s) does the student need help with?
               </p>
               <form-checkbox
@@ -26,116 +26,128 @@
                   <br :key="`${i}-${item.id}`">
                 </template>
               </form-checkbox>
-              <form-input
-                v-model="form.name"
-                vid="password"
-                type="text"
-                label="Name"
-                rules="required"
-              />
-              <form-dropdown
-                v-model="form.board"
-                label="Subject"
-                rules="required"
-                placeholder-text="Select an option"
-              >
-                <option value>Select a Board</option>
-                <option
-                  v-for="(item, i) in boardArray"
-                  :key="`${item.value}-${i}`"
-                  :value="item.value"
-                >
-                  {{ item.text }}
-                </option>
-              </form-dropdown>-->
-              
             </div>
+
+            <form-input
+              key="name"
+              v-model="form.name"
+              vid="name"
+              type="text"
+              label="Name"
+              rules="required"
+              placeholder="Enter your name"
+            />
           </div>
 
           <div v-if="step === 2" class="form-field">
-            <FormDropdown
+            <form-dropdown
               v-if="form.standard!=='pre-primary'"
               ref="board"
               v-model="form.board"
-              label-text="Which board is the student's school affiliated to?"
-              :options="boardArray"
-              :instance="form.board"
-            />
+              label="Which board is the student's school affiliated to?"
+              rules="required"
+            >
+              <option value>Select a Board</option>
+              <option
+                v-for="(item, i) in boardArray"
+                :key="`${item.value}-${i}`"
+                :value="item.value"
+              >
+                {{ item.text }}
+              </option>
+            </form-dropdown>
 
-            <FormDropdown
+            <form-dropdown
               ref="genderPreference"
               v-model="form.gender_preference"
-              label-text="Do student have a gender preference for the tutor?"
-              :options="genderPreferenceArray"
-              :instance="form.gender_preference"
-            />
+              label="Do student have a gender preference for the tutor?"
+              rules="required"
+            >
+              <option value>Select an option</option>
+              <option
+                v-for="(item, i) in genderPreferenceArray"
+                :key="`${item.value}-${i}`"
+                :value="item.value"
+              >
+                {{ item.text }}
+              </option>
+            </form-dropdown>
 
-            <FormRadio
-              v-model="daysRaw"
-              v-validate="'required'"
-              label-text="Which of the days would you prefer to take the classes?"
-              :instance="daysRaw"
-              field-id="daysRaw"
-              name="daysRaw"
-              :error="errors.first('daysRaw')"
-              :option-list="daysArray"
-              @add-to-instance="addToDaysInstance"
-            />
+            <div class="field">
+              <p class="has-text-left is-size-4">
+                Which of the days would you prefer to take the classes?
+              </p>
+              <form-checkbox
+                rules="required"
+                label="daysRaw"
+              >
+                <template v-for="(item,i) in daysArray">
+                  <b-radio
+                    :key="`${i}-${item.value}`"
+                    v-model="daysRaw"
+                    :native-value="item.value"
+                    size="is-medium"
+                  >
+                    {{ item.text }}
+                  </b-radio>
+                  <br :key="`${i}-${item.id}`">
+                </template>
+              </form-checkbox>
+            </div>
 
-            <FormCheckbox
-              v-if="daysRaw==='custom'"
-              v-model="form.days"
-              v-validate="'required'"
-              :instance="form.days"
-              name="days"
-              :error="errors.first('days')"
-              :option-list="customDaysArray"
-              @add-to-instance="addToCustomDaysInstance"
-            />
+            <div v-if="daysRaw==='custom'" class="field">
+              <form-checkbox
+                rules="required"
+                label="Days"
+              >
+                <template v-for="(item,i) in customDaysArray">
+                  <b-checkbox
+                    :key="`${i}-${item}`"
+                    v-model="form.days"
+                    :native-value="item"
+                    size="is-medium"
+                  >
+                    {{ item }}
+                  </b-checkbox>
+                  <br :key="`${i}-${item.id}`">
+                </template>
+              </form-checkbox>
+            </div>
           </div>
           <div v-if="step === 3" class="form-field">
             <p class="has-text-left">
               Your Contact Information
             </p>
 
-            <FormInput
+            <form-input
               key="name"
               v-model="form.name"
-              v-validate="'required'"
+              vid="name"
               type="text"
-              label-text="Name"
-              :instance="form.name"
-              field-id="name"
-              name="name"
-              :error="errors.first('name')"
-              placeholder="Name"
+              label="Name"
+              rules="required"
+              placeholder="Enter your name"
             />
 
-            <FormInput
+            <form-input
               key="contact"
               v-model="form.contact"
-              v-validate="{required: true, regex: /^[5-9]\d{9}$/}"
+              vid="contact"
               type="tel"
-              label-text="Contact(Mobile) Number"
-              :instance="form.contact"
-              field-id="parent-contact"
-              name="contact"
-              :error="errors.first('contact')"
+              label="Contact(Mobile) Number"
+              rules="{required: true, regex: /^[5-9]\d{9}$/}"
               placeholder="Please enter 10 digit mobile number"
             />
 
-            <FormInput
+            <form-input
               key="email"
               v-model="form.email"
-              v-validate="'required|email'"
+              vid="email"
               type="email"
-              label-text="E-mail"
-              :instance="form.email"
-              field-id="email"
-              name="email"
-              :error="errors.first('email')"
+              label="E-mail"
+              rules="required|email"
               placeholder="E-mail"
-            />
+            />\
           </div>
           <div v-if="step === 4" class="form-field">
             <p>Your Location</p>
@@ -164,29 +176,23 @@
               </p>
             </div>
 
-            <FormInput
+            <form-input
               key="address"
               v-model="form.address"
-              v-validate="'required|min:10'"
+              vid="address"
               type="textarea"
-              label-text="Your full address"
-              :instance="form.address"
-              field-id="address"
-              name="address"
-              :error="errors.first('address')"
+              label="Address"
+              rules="required|min:10"
               placeholder="Enter your postal address"
             />
 
-            <FormInput
+            <form-input
               key="landmark"
               v-model="form.landmark"
-              v-validate="'required'"
+              vid="landmark"
               type="text"
-              label-text="Landmark"
-              :instance="form.landmark"
-              field-id="landmark"
-              name="landmark"
-              :error="errors.first('landmark')"
+              label="Landmark"
+              rules="required"
               placeholder="Enter your Landmark"
             />
           </div>

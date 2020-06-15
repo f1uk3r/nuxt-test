@@ -10,7 +10,7 @@
       :type="{ 'is-danger': errors[0], 'is-success': valid }"
       :message="errors"
     >
-      <b-select v-model="innerValue" :placeholder="placeholderText">
+      <b-select v-model="innerValue">
         <slot />
       </b-select>
     </b-field>
@@ -37,10 +37,6 @@ export default {
     value: {
       type: null,
       default: null
-    },
-    placeholderText: {
-      type: String,
-      default: 'Select an option'
     }
   },
   data () {
