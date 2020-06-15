@@ -16,6 +16,7 @@
 <script>
 import { ValidationProvider } from 'vee-validate'
 export default {
+  name: 'FormCheckbox',
   components: {
     ValidationProvider
   },

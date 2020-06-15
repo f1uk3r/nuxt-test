@@ -2,14 +2,18 @@
   <div class="academic-form">
     <div class="relative-container">
       <div class="whole-form">
-        <b-progress type="is-info" :value="progressValue" format="percent"/>
+        <b-progress type="is-info" :value="progressValue" format="percent" />
         <form action="post">
           <div v-if="step === 1" class="form-field">
             <div class="field">
-              <p class="has-text-left is-size-4">
+              <!--<p class="has-text-left is-size-4">
                 Which of the subject(s) does the student need help with?
               </p>
-              <form-checkbox rules="required" name="subjects">
+              <form-checkbox
+                rules="required"
+                name="subjects"
+                label="Subject"
+              >
                 <template v-for="(item,i) in subjectListFinal">
                   <b-checkbox
                     :key="`${i}-${item}`"
@@ -22,22 +26,29 @@
                   <br :key="`${i}-${item.id}`">
                 </template>
               </form-checkbox>
-              <!--<div class="field">
-                <template v-for="(item,i) in subjectListFinal">
-                  <b-checkbox
-                    :key="`${i}-${item}`"
-                    v-model="form.subjects"
-                    :native-value="item"
-                    size="is-medium"
-                  >
-                    {{  item  }}
-                  </b-checkbox>
-                  <br :key="`${i}-${item.id}`" />
-                </template>
-              </div>
-              <p v-show="error" class="help has-text-left is-danger">
-                Select atleast one option.
-              </p>-->
+              <form-input
+                v-model="form.name"
+                vid="password"
+                type="text"
+                label="Name"
+                rules="required"
+              />
+              <form-dropdown
+                v-model="form.board"
+                label="Subject"
+                rules="required"
+                placeholder-text="Select an option"
+              >
+                <option value>Select a Board</option>
+                <option
+                  v-for="(item, i) in boardArray"
+                  :key="`${item.value}-${i}`"
+                  :value="item.value"
+                >
+                  {{ item.text }}
+                </option>
+              </form-dropdown>-->
+              
             </div>
           </div>
 
@@ -221,15 +232,15 @@
 import FormDropdown from './FormDropdown.vue'
 import FormInput from './FormInput.vue'
 import FormCheckbox from './FormCheckbox.vue'
-import FormRadio from './FormRadio.vue'
+// import FormRadio from './FormRadio.vue'
 
 export default {
   name: 'QueryAcademicForm',
   components: {
     FormDropdown,
     FormInput,
-    FormCheckbox,
-    FormRadio
+    FormCheckbox
+    // FormRadio
   },
   props: {},
   data () {
@@ -448,7 +459,7 @@ export default {
     },
     next () {
       if (this.step === 1) {
-        this.$validator.validate('subjects', this.form.subjects)
+        // this.$validator.validate('subjects', this.form.subjects)
         if (this.form.subjects.length !== 0) {
           this.step++
           this.progressValue += 25

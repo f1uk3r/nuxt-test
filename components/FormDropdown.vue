@@ -10,7 +10,7 @@
       :type="{ 'is-danger': errors[0], 'is-success': valid }"
       :message="errors"
     >
-      <b-select v-model="innerValue" placeholder="Select a subject">
+      <b-select v-model="innerValue" :placeholder="placeholderText">
         <slot />
       </b-select>
     </b-field>
@@ -21,6 +21,7 @@
 import { ValidationProvider } from 'vee-validate'
 
 export default {
+  name: 'FormDropdown',
   components: {
     ValidationProvider
   },
@@ -36,6 +37,10 @@ export default {
     value: {
       type: null,
       default: null
+    },
+    placeholderText: {
+      type: String,
+      default: 'Select an option'
     }
   },
   data () {
