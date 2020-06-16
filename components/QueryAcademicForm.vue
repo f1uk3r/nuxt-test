@@ -8,14 +8,20 @@
               step="1"
               label="Subject"
             >
-              <h1 class="title has-text-centered">Account</h1>
               <div class="field">
                 <p class="has-text-left is-size-4">
                   Which of the subject(s) does the student need help with?
                 </p>
+                <div class="field" v-if="form.subjects.length===0">
+                  <b-tag
+                    type="is-danger"
+                  >
+                    <b-icon icon-pack="fas" icon="times-circle" />
+                    Choose atleast one subject
+                  </b-tag>
+                </div>
                 <form-checkbox
                   rules="required"
-                  name="subjects"
                   label="Subject"
                 >
                   <template v-for="(item,i) in subjectListFinal">
@@ -73,6 +79,14 @@
                 <p class="has-text-left is-size-4">
                   Which of the days would you prefer to take the classes?
                 </p>
+                <div class="field" v-if="form.days.length===0">
+                  <b-tag
+                    type="is-danger"
+                  >
+                    <b-icon icon-pack="fas" icon="times-circle" />
+                    Choose one of the options
+                  </b-tag>
+                </div>
                 <form-checkbox
                   rules="required"
                   label="daysRaw"
@@ -130,7 +144,7 @@
                 vid="contact"
                 type="tel"
                 label="Contact(Mobile) Number"
-                rules="{required: true, regex: /^[5-9]\d{9}$/}"
+                rules="required|integer|regex:/^[5-9]\d{9}$/"
                 placeholder="Please enter 10 digit mobile number"
               />
 
@@ -193,253 +207,42 @@
               />
             </b-step-item>
             <template slot="navigation" slot-scope="{previous, next}">
-              <b-button
-                outlined
-                type="is-info"
-                icon-pack="fas"
-                icon-left="backward"
-                :disabled="previous.disabled"
-                @click.prevent="previous.action"
-              >
-                Previous
-              </b-button>
-              <b-button
-                outlined
-                type="is-info"
-                icon-pack="fas"
-                icon-right="forward"
-                :disabled="next.disabled"
-                @click.prevent="next.action"
-              >
-                Next
-              </b-button>
+              <div class="field is-grouped">
+                <b-button
+                  outlined
+                  type="is-info"
+                  icon-pack="fas"
+                  icon-left="backward"
+                  :disabled="previous.disabled"
+                  @click.prevent="previous.action"
+                >
+                  Previous
+                </b-button>
+                <b-button
+                  v-if="step!==3"
+                  outlined
+                  type="is-info"
+                  icon-pack="fas"
+                  icon-right="forward"
+                  :disabled="next.disabled"
+                  @click.prevent="next.action"
+                >
+                  Next
+                </b-button>
+                <b-button
+                  v-if="step===3"
+                  outlined
+                  type="is-success"
+                  icon-pack="fas"
+                  icon-right="check-circle"
+                  @click.prevent="next.action"
+                >
+                  Submit
+                </b-button>
+              </div>
             </template>
           </b-steps>
-          <!--<div v-if="step === 1" class="form-field">
-            <div class="field">
-              <p class="has-text-left is-size-4">
-                Which of the subject(s) does the student need help with?
-              </p>
-              <form-checkbox
-                rules="required"
-                name="subjects"
-                label="Subject"
-              >
-                <template v-for="(item,i) in subjectListFinal">
-                  <b-checkbox
-                    :key="`${i}-${item}`"
-                    v-model="form.subjects"
-                    :native-value="item"
-                    size="is-medium"
-                  >
-                    {{ item }}
-                  </b-checkbox>
-                  <br :key="`${i}-${item.id}`">
-                </template>
-              </form-checkbox>
-            </div>
-
-            <form-input
-              key="name"
-              v-model="form.name"
-              vid="name"
-              type="text"
-              label="Name"
-              rules="required"
-              placeholder="Enter your name"
-            />
-          </div>
-
-          <div v-if="step === 2" class="form-field">
-            <form-dropdown
-              v-if="form.standard!=='pre-primary'"
-              ref="board"
-              v-model="form.board"
-              label="Which board is the student's school affiliated to?"
-              rules="required"
-            >
-              <option value>Select a Board</option>
-              <option
-                v-for="(item, i) in boardArray"
-                :key="`${item.value}-${i}`"
-                :value="item.value"
-              >
-                {{ item.text }}
-              </option>
-            </form-dropdown>
-
-            <form-dropdown
-              ref="genderPreference"
-              v-model="form.gender_preference"
-              label="Do student have a gender preference for the tutor?"
-              rules="required"
-            >
-              <option value>Select an option</option>
-              <option
-                v-for="(item, i) in genderPreferenceArray"
-                :key="`${item.value}-${i}`"
-                :value="item.value"
-              >
-                {{ item.text }}
-              </option>
-            </form-dropdown>
-
-            <div class="field">
-              <p class="has-text-left is-size-4">
-                Which of the days would you prefer to take the classes?
-              </p>
-              <form-checkbox
-                rules="required"
-                label="daysRaw"
-              >
-                <template v-for="(item,i) in daysArray">
-                  <b-radio
-                    :key="`${i}-${item.value}`"
-                    v-model="daysRaw"
-                    :native-value="item.value"
-                    size="is-medium"
-                  >
-                    {{ item.text }}
-                  </b-radio>
-                  <br :key="`${i}-${item.id}`">
-                </template>
-              </form-checkbox>
-            </div>
-
-            <div v-if="daysRaw==='custom'" class="field">
-              <form-checkbox
-                rules="required"
-                label="Days"
-              >
-                <template v-for="(item,i) in customDaysArray">
-                  <b-checkbox
-                    :key="`${i}-${item}`"
-                    v-model="form.days"
-                    :native-value="item"
-                    size="is-medium"
-                  >
-                    {{ item }}
-                  </b-checkbox>
-                  <br :key="`${i}-${item.id}`">
-                </template>
-              </form-checkbox>
-            </div>
-          </div>
-          <div v-if="step === 3" class="form-field">
-            <p class="has-text-left">
-              Your Contact Information
-            </p>
-
-            <form-input
-              key="name"
-              v-model="form.name"
-              vid="name"
-              type="text"
-              label="Name"
-              rules="required"
-              placeholder="Enter your name"
-            />
-
-            <form-input
-              key="contact"
-              v-model="form.contact"
-              vid="contact"
-              type="tel"
-              label="Contact(Mobile) Number"
-              rules="{required: true, regex: /^[5-9]\d{9}$/}"
-              placeholder="Please enter 10 digit mobile number"
-            />
-
-            <form-input
-              key="email"
-              v-model="form.email"
-              vid="email"
-              type="email"
-              label="E-mail"
-              rules="required|email"
-              placeholder="E-mail"
-            />
-          </div>
-          <div v-if="step === 4" class="form-field">
-            <p>Your Location</p>
-
-            <div class="field">
-              <label class="label has-text-left" for="location">Your locality</label>
-              <div class="control">
-                <input
-                  id="location"
-                  ref="location"
-                  key="location"
-                  v-model="form.location"
-                  v-validate="'required'"
-                  type="text"
-                  name="location"
-                  placeholder="eg. Heerapura"
-                  class="input"
-                  :class="{'is-danger': errors.first('location'), 'is-success': !errors.first('location') && form.location && form.location!==''}"
-                >
-              </div>
-              <p
-                v-show="errors.first('location')"
-                class="help has-text-left danger"
-              >
-                {{ errors.first('location') }}
-              </p>
-            </div>
-
-            <form-input
-              key="address"
-              v-model="form.address"
-              vid="address"
-              type="textarea"
-              label="Address"
-              rules="required|min:10"
-              placeholder="Enter your postal address"
-            />
-
-            <form-input
-              key="landmark"
-              v-model="form.landmark"
-              vid="landmark"
-              type="text"
-              label="Landmark"
-              rules="required"
-              placeholder="Enter your Landmark"
-            />
-          </div>
-
-          <div v-if="step === 5" class="modal-form">
-            <h1>That's all, thank you!</h1>
-            <span style="font-size: 60px; color: #3273dc;"><i class="fas fa-check-circle" /></span>
-            <p>Our team will try to contact you as soon as possible!</p>
-            <p>Got a minute? Show us some love!</p>
-            <p>Follow us on <a href="https://twitter.com/edhusk_com">Twitter</a> and like us on <a href="https://www.facebook.com/edhuskindia/">Facebook</a>.</p>
-          </div>-->
         </form>
-
-        <!--<div class="field is-grouped">
-          <button
-            v-show="step===2 || step===3 || step===4"
-            class="button is-link"
-            @click.prevent="prev()"
-          >
-            Previous
-          </button>
-          <button
-            v-show="step===1 || step===2 || step===3"
-            class="button is-link"
-            @click.prevent="next()"
-          >
-            Next
-          </button>
-          <button
-            v-show="step===4"
-            class="button is-link"
-            @click.prevent="validateBeforeSubmit()"
-          >
-            Submit
-          </button>
-        </div>-->
       </div>
     </div>
   </div>
@@ -460,7 +263,7 @@ export default {
   props: {},
   data () {
     return {
-      step: 1,
+      step: 0,
       progressValue: 0,
       boardArray: [
         { value: 'cbse', text: 'CBSE' },
@@ -779,7 +582,6 @@ export default {
     bottom: 0;
     left: 0;
     z-index: 100;
-    margin: 0 10px;
   }
   div.whole-form {
     position: absolute;
@@ -793,7 +595,7 @@ export default {
   form {
     padding: 10px;
     overflow-y: scroll;
-    height: 100%;
+    height: 85%;
   }
   div.progress-wrapper {
     padding: 10px 10px 0 10px;
@@ -801,12 +603,15 @@ export default {
   form>div.form-field>div.field>p {
     padding-bottom: 15px;
   }
-/*  div.whole-form > div.field.is-grouped {
+/*  nav.steps {
     position: absolute;
-    bottom: 10px;
-    padding: 10px;
-  }
-  div.whole-form > div.field.is-grouped > button.button {
-    margin: 5px;
   }*/
+  div.field.is-grouped {
+    position: absolute;
+    bottom: 5px;
+    padding: 10px 10px 0px 10px;
+  }
+  div.field.is-grouped > button.button {
+    margin: 5px;
+  }
 </style>

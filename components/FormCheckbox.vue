@@ -3,6 +3,7 @@
     v-slot="{ errors }"
     :name="$attrs.label"
     :rules="rules"
+    :vid="vid"
   >
     <div class="block">
       <slot />
@@ -21,6 +22,10 @@ export default {
     ValidationProvider
   },
   props: {
+    vid: {
+      type: String,
+      default: ''
+    },
     rules: {
       type: [Object, String],
       default: ''

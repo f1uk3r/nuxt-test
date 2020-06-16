@@ -20,7 +20,7 @@
                 <br :key="`${i}-${item.id}`">
               </template>
             </form-checkbox>-->
-            <ValidationProvider v-slot="{ errors }" name="Subject" rules="required">
+            <ValidationProvider :vid="vid" v-slot="{ errors }" name="Subject" rules="required">
               <div class="block">
                 <template v-for="(item, i) in subjectListFinal">
                   <b-checkbox
