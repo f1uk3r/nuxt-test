@@ -2,253 +2,264 @@
   <div class="academic-form">
     <div class="relative-container">
       <div class="whole-form">
-        <form action="post">
-          <b-steps v-model="step">
-            <b-step-item
-              step="1"
-              label="Subject"
-            >
-              <div class="field">
-                <p class="has-text-left is-size-4">
-                  Which of the subject(s) does the student need help with?
-                </p>
-                <div class="field" v-if="form.subjects.length===0">
-                  <b-tag
-                    type="is-danger"
-                  >
-                    <b-icon icon-pack="fas" icon="times-circle" />
-                    Choose atleast one subject
-                  </b-tag>
-                </div>
-                <form-checkbox
-                  rules="required"
-                  label="Subject"
-                >
-                  <template v-for="(item,i) in subjectListFinal">
-                    <b-checkbox
-                      :key="`${i}-${item}`"
-                      v-model="form.subjects"
-                      :native-value="item"
-                      size="is-medium"
+        <ValidationObserver ref="form">
+          <form action="post">
+            <b-steps v-model="step">
+              <b-step-item
+                step="1"
+                label="Subject"
+              >
+                <ValidationObserver ref="subjectSection">
+                  <div class="field">
+                    <p class="has-text-left is-size-4">
+                      Which of the subject(s) does the student need help with?
+                    </p>
+                    <div class="field" v-if="form.subjects.length===0">
+                      <b-tag
+                        type="is-danger"
+                      >
+                        <b-icon icon-pack="fas" icon="times-circle" />
+                        Choose atleast one subject
+                      </b-tag>
+                    </div>
+                    <form-checkbox
+                      rules="required"
+                      label="Subject"
                     >
-                      {{ item }}
-                    </b-checkbox>
-                    <br :key="`${i}-${item.id}`">
-                  </template>
-                </form-checkbox>
-              </div>
-            </b-step-item>
-            <b-step-item
-              step="2"
-              label="Preference"
-            >
-              <form-dropdown
-                v-if="form.standard!=='pre-primary'"
-                ref="board"
-                v-model="form.board"
-                label="Which board is the student's school affiliated to?"
-                rules="required"
+                      <template v-for="(item,i) in subjectListFinal">
+                        <b-checkbox
+                          :key="`${i}-${item}`"
+                          v-model="form.subjects"
+                          :native-value="item"
+                          size="is-medium"
+                        >
+                          {{ item }}
+                        </b-checkbox>
+                        <br :key="`${i}-${item.id}`">
+                      </template>
+                    </form-checkbox>
+                  </div>
+                </ValidationObserver>
+              </b-step-item>
+              <b-step-item
+                step="2"
+                label="Preference"
               >
-                <option value>Select a Board</option>
-                <option
-                  v-for="(item, i) in boardArray"
-                  :key="`${item.value}-${i}`"
-                  :value="item.value"
-                >
-                  {{ item.text }}
-                </option>
-              </form-dropdown>
-
-              <form-dropdown
-                ref="genderPreference"
-                v-model="form.gender_preference"
-                label="Do student have a gender preference for the tutor?"
-                rules="required"
-              >
-                <option value>Select an option</option>
-                <option
-                  v-for="(item, i) in genderPreferenceArray"
-                  :key="`${item.value}-${i}`"
-                  :value="item.value"
-                >
-                  {{ item.text }}
-                </option>
-              </form-dropdown>
-
-              <div class="field">
-                <p class="has-text-left is-size-4">
-                  Which of the days would you prefer to take the classes?
-                </p>
-                <div class="field" v-if="form.days.length===0">
-                  <b-tag
-                    type="is-danger"
+                <ValidationObserver ref="preferenceSection">
+                  <form-dropdown
+                    v-if="form.standard!=='pre-primary'"
+                    ref="board"
+                    v-model="form.board"
+                    label="Which board is the student's school affiliated to?"
+                    rules="required"
                   >
-                    <b-icon icon-pack="fas" icon="times-circle" />
-                    Choose one of the options
-                  </b-tag>
-                </div>
-                <form-checkbox
-                  rules="required"
-                  label="daysRaw"
-                >
-                  <template v-for="(item,i) in daysArray">
-                    <b-radio
-                      :key="`${i}-${item.value}`"
-                      v-model="daysRaw"
-                      :native-value="item.value"
-                      size="is-medium"
+                    <option value>Select a Board</option>
+                    <option
+                      v-for="(item, i) in boardArray"
+                      :key="`${item.value}-${i}`"
+                      :value="item.value"
                     >
                       {{ item.text }}
-                    </b-radio>
-                    <br :key="`${i}-${item.id}`">
-                  </template>
-                </form-checkbox>
-              </div>
+                    </option>
+                  </form-dropdown>
 
-              <div v-if="daysRaw==='custom'" class="field">
-                <form-checkbox
-                  rules="required"
-                  label="Days"
-                >
-                  <template v-for="(item,i) in customDaysArray">
-                    <b-checkbox
-                      :key="`${i}-${item}`"
-                      v-model="form.days"
-                      :native-value="item"
-                      size="is-medium"
-                    >
-                      {{ item }}
-                    </b-checkbox>
-                    <br :key="`${i}-${item.id}`">
-                  </template>
-                </form-checkbox>
-              </div>
-            </b-step-item>
-            <b-step-item
-              step="3"
-              label="Personal Information"
-            >
-              <form-input
-                key="name"
-                v-model="form.name"
-                vid="name"
-                type="text"
-                label="Name"
-                rules="required"
-                placeholder="Enter your name"
-              />
-
-              <form-input
-                key="contact"
-                v-model="form.contact"
-                vid="contact"
-                type="tel"
-                label="Contact(Mobile) Number"
-                rules="required|integer|regex:/^[5-9]\d{9}$/"
-                placeholder="Please enter 10 digit mobile number"
-              />
-
-              <form-input
-                key="email"
-                v-model="form.email"
-                vid="email"
-                type="email"
-                label="E-mail"
-                rules="required|email"
-                placeholder="E-mail"
-              />
-            </b-step-item>
-            <b-step-item
-              step="4"
-              label="Location"
-            >
-              <!--<div class="field">
-                <label class="label has-text-left" for="location">Your locality</label>
-                <div class="control">
-                  <input
-                    id="location"
-                    ref="location"
-                    key="location"
-                    v-model="form.location"
-                    v-validate="'required'"
-                    type="text"
-                    name="location"
-                    placeholder="eg. Heerapura"
-                    class="input"
-                    :class="{'is-danger': errors.first('location'), 'is-success': !errors.first('location') && form.location && form.location!==''}"
+                  <form-dropdown
+                    ref="genderPreference"
+                    v-model="form.gender_preference"
+                    label="Do student have a gender preference for the tutor?"
+                    rules="required"
                   >
+                    <option value>Select an option</option>
+                    <option
+                      v-for="(item, i) in genderPreferenceArray"
+                      :key="`${item.value}-${i}`"
+                      :value="item.value"
+                    >
+                      {{ item.text }}
+                    </option>
+                  </form-dropdown>
+
+                  <div class="field">
+                    <p class="has-text-left is-size-4">
+                      Which of the days would you prefer to take the classes?
+                    </p>
+                    <div class="field" v-if="form.days.length===0">
+                      <b-tag
+                        type="is-danger"
+                      >
+                        <b-icon icon-pack="fas" icon="times-circle" />
+                        Choose one of the options
+                      </b-tag>
+                    </div>
+                    <form-checkbox
+                      rules="required"
+                      label="daysRaw"
+                    >
+                      <template v-for="(item,i) in daysArray">
+                        <b-radio
+                          :key="`${i}-${item.value}`"
+                          v-model="daysRaw"
+                          :native-value="item.value"
+                          size="is-medium"
+                        >
+                          {{ item.text }}
+                        </b-radio>
+                        <br :key="`${i}-${item.id}`">
+                      </template>
+                    </form-checkbox>
+                  </div>
+
+                  <div v-if="daysRaw==='custom'" class="field">
+                    <form-checkbox
+                      rules="required"
+                      label="Days"
+                    >
+                      <template v-for="(item,i) in customDaysArray">
+                        <b-checkbox
+                          :key="`${i}-${item}`"
+                          v-model="form.days"
+                          :native-value="item"
+                          size="is-medium"
+                        >
+                          {{ item }}
+                        </b-checkbox>
+                        <br :key="`${i}-${item.id}`">
+                      </template>
+                    </form-checkbox>
+                  </div>
+                </ValidationObserver>
+              </b-step-item>
+              <b-step-item
+                step="3"
+                label="Personal Information"
+              >
+                <ValidationObserver ref="informationSection">
+                  <form-input
+                    key="name"
+                    v-model="form.name"
+                    vid="name"
+                    type="text"
+                    label="Name"
+                    rules="required"
+                    placeholder="Enter your name"
+                  />
+
+                  <form-input
+                    key="contact"
+                    v-model="form.contact"
+                    vid="contact"
+                    type="tel"
+                    label="Contact(Mobile) Number"
+                    rules="required|digits:10"
+                    placeholder="Please enter 10 digit mobile number"
+                  />
+
+                  <form-input
+                    key="email"
+                    v-model="form.email"
+                    vid="email"
+                    type="email"
+                    label="E-mail"
+                    rules="required|email"
+                    placeholder="E-mail"
+                  />
+                </ValidationObserver>
+              </b-step-item>
+              <b-step-item
+                step="4"
+                label="Location"
+              >
+                <ValidationObserver ref="locationSection">
+                  <!--<div class="field">
+                    <label class="label has-text-left" for="location">Your locality</label>
+                    <div class="control">
+                      <input
+                        id="location"
+                        ref="location"
+                        key="location"
+                        v-model="form.location"
+                        v-validate="'required'"
+                        type="text"
+                        name="location"
+                        placeholder="eg. Heerapura"
+                        class="input"
+                        :class="{'is-danger': errors.first('location'), 'is-success': !errors.first('location') && form.location && form.location!==''}"
+                      >
+                    </div>
+                    <p
+                      v-show="errors.first('location')"
+                      class="help has-text-left danger"
+                    >
+                      {{ errors.first('location') }}
+                    </p>
+                  </div>-->
+
+                  <form-input
+                    key="address"
+                    v-model="form.address"
+                    vid="address"
+                    type="textarea"
+                    label="Address"
+                    rules="required|min:10"
+                    placeholder="Enter your postal address"
+                  />
+
+                  <form-input
+                    key="landmark"
+                    v-model="form.landmark"
+                    vid="landmark"
+                    type="text"
+                    label="Landmark"
+                    rules="required"
+                    placeholder="Enter your Landmark"
+                  />
+                </ValidationObserver>
+              </b-step-item>
+              <template slot="navigation" slot-scope="{previous, next}">
+                <div class="field is-grouped">
+                  <b-button
+                    outlined
+                    type="is-info"
+                    icon-pack="fas"
+                    icon-left="backward"
+                    :disabled="previous.disabled"
+                    @click.prevent="previous.action"
+                  >
+                    Previous
+                  </b-button>
+                  <b-button
+                    v-if="step!==3"
+                    outlined
+                    type="is-info"
+                    icon-pack="fas"
+                    icon-right="forward"
+                    :disabled="next.disabled"
+                    @click.prevent="onNext"
+                  >
+                    Next
+                  </b-button>
+                  <b-button
+                    v-if="step===3"
+                    outlined
+                    type="is-success"
+                    icon-pack="fas"
+                    icon-right="check-circle"
+                    @click.prevent="onSubmit"
+                  >
+                    Submit
+                  </b-button>
                 </div>
-                <p
-                  v-show="errors.first('location')"
-                  class="help has-text-left danger"
-                >
-                  {{ errors.first('location') }}
-                </p>
-              </div>-->
-
-              <form-input
-                key="address"
-                v-model="form.address"
-                vid="address"
-                type="textarea"
-                label="Address"
-                rules="required|min:10"
-                placeholder="Enter your postal address"
-              />
-
-              <form-input
-                key="landmark"
-                v-model="form.landmark"
-                vid="landmark"
-                type="text"
-                label="Landmark"
-                rules="required"
-                placeholder="Enter your Landmark"
-              />
-            </b-step-item>
-            <template slot="navigation" slot-scope="{previous, next}">
-              <div class="field is-grouped">
-                <b-button
-                  outlined
-                  type="is-info"
-                  icon-pack="fas"
-                  icon-left="backward"
-                  :disabled="previous.disabled"
-                  @click.prevent="previous.action"
-                >
-                  Previous
-                </b-button>
-                <b-button
-                  v-if="step!==3"
-                  outlined
-                  type="is-info"
-                  icon-pack="fas"
-                  icon-right="forward"
-                  :disabled="next.disabled"
-                  @click.prevent="next.action"
-                >
-                  Next
-                </b-button>
-                <b-button
-                  v-if="step===3"
-                  outlined
-                  type="is-success"
-                  icon-pack="fas"
-                  icon-right="check-circle"
-                  @click.prevent="next.action"
-                >
-                  Submit
-                </b-button>
-              </div>
-            </template>
-          </b-steps>
-        </form>
+              </template>
+            </b-steps>
+          </form>
+        </ValidationObserver>
       </div>
     </div>
   </div>
 </template>
 
 <script>
+import { ValidationObserver } from 'vee-validate'
 import FormDropdown from './FormDropdown.vue'
 import FormInput from './FormInput.vue'
 import FormCheckbox from './FormCheckbox.vue'
@@ -256,6 +267,7 @@ import FormCheckbox from './FormCheckbox.vue'
 export default {
   name: 'QueryAcademicForm',
   components: {
+    ValidationObserver,
     FormDropdown,
     FormInput,
     FormCheckbox
@@ -457,76 +469,30 @@ export default {
     )
   }, */
   methods: {
-    /* addToInstance method is corrosponding to checkbox component */
-    /* addToDaysInstance (e) {
-      this.daysRaw = e
-      if (this.daysRaw === 'custom') {
-        this.form.days = []
-      }
-    },
-    addToCustomDaysInstance (e) {
-      if (this.form.days.includes(e)) {
-        this.form.days.push(e)
-      } else {
-        this.form.days.splice(this.form.days.indexOf(e), 1)
-      }
-    }, */
-    prev () {
-      this.progressValue -= 25
-      this.step--
-    },
-    next () {
-      if (this.step === 1) {
+    onNext () {
+      if (this.step === 0) {
         // this.$validator.validate('subjects', this.form.subjects)
+        this.$refs.subjectSection.validate()
         if (this.form.subjects.length !== 0) {
           this.step++
-          this.progressValue += 25
         }
-      } else if (this.step === 2 && this.form.standard !== 'pre-primary') {
-        this.$refs.board.dropdownToggle()
-        this.$refs.genderPreference.dropdownToggle()
-        this.$validator.validate('daysRaw', this.daysRaw)
-        if (this.daysRaw === 'custom') {
-          this.$validator.validate('days', this.form.days)
-        }
-        if (
-          this.form.board !== '' &&
-          this.form.gender_preference !== '' &&
-          this.daysRaw !== '' &&
-          this.form.days !== []
-        ) {
-          this.step++
-          this.progressValue += 25
-        }
-      } else if (this.step === 1 && this.form.standard === 'pre-primary') {
-        this.$refs.genderPreference.dropdownToggle()
-        this.$validator.validate('daysRaw', this.daysRaw)
-        if (this.daysRaw === 'custom') {
-          this.$validator.validate('days', this.form.days)
-        }
-        if (
-          this.form.gender_preference !== '' &&
-          this.daysRaw !== '' &&
-          this.form.days !== []
-        ) {
-          this.step++
-          this.progressValue += 25
-        }
-      } else if (this.step === 3) {
-        this.$validator.validate('name', this.form.name)
-        this.$validator.validate('contact', this.form.contact)
-        this.$validator.validate('email', this.form.email).then(() => {
-          if (this.errors.items.length === 0) {
+      } else if (this.step === 1) {
+        this.$refs.preferenceSection.validate().then((success) => {
+          if (success && this.form.days !== []) {
             this.step++
-            this.progressValue += 25
+          }
+        })
+      } else if (this.step === 2) {
+        this.$refs.informationSection.validate().then((success) => {
+          if (success) {
+            this.step++
           }
         })
       }
     },
-    validateBeforeSubmit () {
-      this.$validator.validate('location', this.form.location)
-      this.$validator.validate('address', this.form.address).then(() => {
-        if (this.errors.items.length === 0) {
+    onSubmit () {
+      this.$ref.formvalidate().then((success) => {
+        if (success) {
           this.addQuery()
         }
       })
@@ -555,17 +521,7 @@ export default {
         })
     },
     resetData () {
-      /* this.form.standard = '',
-      this.form.subjects = [],
-      this.form.board = '',
-      this.form.days = [],
-      this.form.gender_preference = '',
-      this.form.location = '',
-      this.form.address = '',
-      this.form.landmark = '',
-      this.form.name = '',
-      this.form.contact = '',
-      this.form.email = '', */
+      this.$refs.form.reset()
       this.step++
     }
   }
