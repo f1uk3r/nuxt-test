@@ -176,7 +176,14 @@
                     :type="{ 'is-danger': form.location==='', 'is-success': form.location!=='' }"
                     :message="locationMessage"
                   >
-                    <input ref="searchTextField" v-model="form.location" class="input" type="text" placeholder="eg Heerapura">
+                    <input
+                      ref="searchTextField"
+                      v-model="form.location"
+                      :class="{ 'is-danger': form.location==='', 'is-success': form.location!=='' }"
+                      class="input"
+                      type="text"
+                      placeholder="eg Heerapura"
+                    >
                   </b-field>
                   <form-input
                     key="address"
