@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 <template>
   <div class="academic-form">
     <div class="relative-container">
@@ -170,30 +171,13 @@
                 label="Location"
               >
                 <ValidationObserver ref="locationSection">
-                  <!--<div class="field">
-                    <label class="label has-text-left" for="location">Your locality</label>
-                    <div class="control">
-                      <input
-                        id="location"
-                        ref="location"
-                        key="location"
-                        v-model="form.location"
-                        v-validate="'required'"
-                        type="text"
-                        name="location"
-                        placeholder="eg. Heerapura"
-                        class="input"
-                        :class="{'is-danger': errors.first('location'), 'is-success': !errors.first('location') && form.location && form.location!==''}"
-                      >
-                    </div>
-                    <p
-                      v-show="errors.first('location')"
-                      class="help has-text-left danger"
-                    >
-                      {{ errors.first('location') }}
-                    </p>
-                  </div>-->
-
+                  <b-field
+                    key="location"
+                    :type="{ 'is-danger': form.location==='', 'is-success': form.location!=='' }"
+                    :message="locationMessage"
+                  >
+                    <input ref="searchTextField" v-model="form.location" class="input" type="text" placeholder="eg Heerapura">
+                  </b-field>
                   <form-input
                     key="address"
                     v-model="form.address"
@@ -386,6 +370,12 @@ export default {
     }
   },
   computed: {
+    locationMessage () {
+      if (this.form.location === '') {
+        return 'This field is required'
+      }
+      return null
+    },
     subjectListFinal () {
       if (this.form.standard === 'pre-primary') {
         return this.prePrimarySubjects
@@ -462,16 +452,21 @@ export default {
       }
     }
   },
-  /* mounted () {
-    let autocomplete = new google.maps.places.Autocomplete(
-      this.$refs.location,
+  mounted () {
+    // eslint-disable-next-line no-undef
+    this.autocomplete = new google.maps.places.Autocomplete(
+      (this.$refs.searchTextField),
       { types: ['geocode'] }
     )
-  }, */
+    this.autocomplete.addListener('place_changed', () => {
+      const place = this.autocomplete.getPlace()
+      // eslint-disable-next-line no-template-curly-in-string
+      this.form.location = place.formatted_address
+    })
+  },
   methods: {
     onNext () {
       if (this.step === 0) {
-        // this.$validator.validate('subjects', this.form.subjects)
         this.$refs.subjectSection.validate()
         if (this.form.subjects.length !== 0) {
           this.step++
@@ -492,7 +487,7 @@ export default {
     },
     onSubmit () {
       this.$ref.formvalidate().then((success) => {
-        if (success) {
+        if (success && this.form.location !== '') {
           this.addQuery()
         }
       })
