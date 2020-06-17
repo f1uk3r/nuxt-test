@@ -453,6 +453,8 @@ export default {
     }
   },
   mounted () {
+    // https://medium.com/@jpoechill/superbasic-google-autocomplete-with-nuxt-js-378a9262659a
+    // https://medium.com/dailyjs/google-places-autocomplete-in-vue-js-350aa934b18d
     // eslint-disable-next-line no-undef
     this.autocomplete = new google.maps.places.Autocomplete(
       (this.$refs.searchTextField),
