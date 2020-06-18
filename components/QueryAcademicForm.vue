@@ -191,7 +191,7 @@
                     vid="address"
                     type="textarea"
                     label="Address"
-                    rules="required|min:10"
+                    rules="required"
                     placeholder="Enter your postal address"
                   />
 
@@ -205,6 +205,16 @@
                     placeholder="Enter your Landmark"
                   />
                 </ValidationObserver>
+              </b-step-item>
+              <b-step-item
+                step="5"
+                label="Thank You"
+              >
+                <h1>That's all, thank you!</h1>
+                <span style="font-size: 60px; color: #3273dc;"><i class="fas fa-check-circle" /></span>
+                <p>Our team will try to contact you as soon as possible!</p>
+                <p>Got a minute? Show us some love!</p>
+                <p>Follow us on <a href="https://twitter.com/edhusk_com">Twitter</a> and like us on <a href="https://www.facebook.com/edhuskindia/">Facebook</a>.</p>
               </b-step-item>
               <template slot="navigation" slot-scope="{previous, next}">
                 <div class="field is-grouped">
@@ -263,11 +273,9 @@ export default {
     FormInput,
     FormCheckbox
   },
-  props: {},
   data () {
     return {
       step: 0,
-      progressValue: 0,
       boardArray: [
         { value: 'cbse', text: 'CBSE' },
         { value: 'icse', text: 'ICSE' },
@@ -495,14 +503,14 @@ export default {
       }
     },
     onSubmit () {
-      this.$ref.formvalidate().then((success) => {
+      this.$refs.form.validate().then((success) => {
         if (success && this.form.location !== '') {
           this.addQuery()
         }
       })
     },
     addQuery () {
-      this.$axios.post('/student-query/', {
+      /* this.$axios.post('/student-query/', {
         data: {
           fees: this.form.fees,
           category: this.form.category,
@@ -522,7 +530,8 @@ export default {
         .then(this.resetData())
         .catch((error) => {
           console.log(error)
-        })
+        }) */
+      this.resetData()
     },
     resetData () {
       this.$refs.form.reset()
