@@ -219,6 +219,7 @@
               <template slot="navigation" slot-scope="{previous, next}">
                 <div class="field is-grouped">
                   <b-button
+                    v-if="step!==4"
                     outlined
                     type="is-info"
                     icon-pack="fas"
@@ -229,7 +230,7 @@
                     Previous
                   </b-button>
                   <b-button
-                    v-if="step!==3"
+                    v-if="step!==3 || step!==4"
                     outlined
                     type="is-info"
                     icon-pack="fas"
