@@ -6,7 +6,7 @@
           <form action="post">
             <b-steps v-model="step">
               <b-step-item
-                v-if="form.standard === 'dietician' || form.standard === 'trainer' || form.standard === 'yoga'"
+                v-if="form.standard!=='zumba'"
                 icon="check-square"
                 label="Subject"
               >
@@ -310,7 +310,7 @@
               <template slot="navigation" slot-scope="{previous, next}">
                 <div class="field is-grouped">
                   <b-button
-                    v-if="step!==5"
+                    v-if="previousButtonShow"
                     outlined
                     type="is-info"
                     icon-pack="fas"
@@ -321,7 +321,7 @@
                     Previous
                   </b-button>
                   <b-button
-                    v-if="step<4"
+                    v-if="nextButtonShow"
                     outlined
                     type="is-info"
                     icon-pack="fas"
@@ -332,7 +332,7 @@
                     Next
                   </b-button>
                   <b-button
-                    v-if="step===4"
+                    v-if="submitButtonShow"
                     outlined
                     type="is-success"
                     icon-pack="fas"
@@ -470,6 +470,30 @@ export default {
     }
   },
   computed: {
+    previousButtonShow () {
+      if (this.step < 4) {
+        return true
+      } else if (this.form.standard !== 'zumba' && this.step === 5) {
+        return true
+      }
+      return false
+    },
+    nextButtonShow () {
+      if (this.step < 3) {
+        return true
+      } else if (this.form.standard !== 'zumba' && this.step === 3) {
+        return true
+      }
+      return false
+    },
+    submitButtonShow () {
+      if (this.form.standard !== 'zumba' && this.step === 4) {
+        return true
+      } else if (this.form.standard === 'zumba' && this.step === 3) {
+        return true
+      }
+      return false
+    },
     locationMessage () {
       if (this.form.location === '') {
         return 'This field is required'
@@ -479,8 +503,6 @@ export default {
     subjectListFinal () {
       if (this.form.standard === 'dietician') {
         return this.dieticianSubjects
-      } else if (this.form.standard === 'martial-arts') {
-        return this.martialArtsSubjects
       } else if (this.form.standard === 'trainer') {
         return this.trainerSubjects
       } else if (this.form.standard === 'yoga') {
@@ -491,8 +513,6 @@ export default {
     subjectQuestionFinal () {
       if (this.form.standard === 'dietician') {
         return 'Which of the following do you need help with?'
-      } else if (this.form.standard === 'martial-arts') {
-        return 'Which of the following Martial Art Form(s) do you need help with?'
       } else if (this.form.standard === 'trainer') {
         return 'Which of the following do you need help with?'
       } else if (this.form.standard === 'yoga') {
@@ -553,29 +573,51 @@ export default {
   },
   methods: {
     onNext () {
-      if (this.step === 0) {
-        this.$refs.subjectSection.validate()
-        if (this.form.subjects.length !== 0) {
-          this.step++
+      if (this.form.standard !== 'zumba') {
+        if (this.step === 0) {
+          this.$refs.subjectSection.validate()
+          if (this.form.subjects.length !== 0) {
+            this.step++
+          }
+        } else if (this.step === 1) {
+          this.$refs.preferenceSection.validate().then((success) => {
+            if (success && this.form.days !== []) {
+              this.step++
+            }
+          })
+        } else if (this.step === 2) {
+          this.$refs.typeSection.validate().then((success) => {
+            if (success) {
+              this.step++
+            }
+          })
+        } else if (this.step === 3) {
+          this.$refs.informationSection.validate().then((success) => {
+            if (success) {
+              this.step++
+            }
+          })
         }
-      } else if (this.step === 1) {
-        this.$refs.preferenceSection.validate().then((success) => {
-          if (success && this.form.days !== []) {
-            this.step++
-          }
-        })
-      } else if (this.step === 2) {
-        this.$refs.typeSection.validate().then((success) => {
-          if (success) {
-            this.step++
-          }
-        })
-      } else if (this.step === 3) {
-        this.$refs.informationSection.validate().then((success) => {
-          if (success) {
-            this.step++
-          }
-        })
+      } else if (this.form.standard === 'zumba') {
+        if (this.step === 0) {
+          this.$refs.preferenceSection.validate().then((success) => {
+            if (success && this.form.days !== []) {
+              this.step++
+            }
+          })
+        } else if (this.step === 1) {
+          this.$refs.typeSection.validate().then((success) => {
+            if (success) {
+              this.step++
+            }
+          })
+        } else if (this.step === 2) {
+          this.$refs.informationSection.validate().then((success) => {
+            if (success) {
+              this.step++
+            }
+          })
+        }
       }
     },
     onSubmit () {
