@@ -6,7 +6,7 @@
           <form action="post">
             <b-steps v-model="step">
               <b-step-item
-                step="1"
+                icon="check-square"
                 label="Subject"
               >
                 <ValidationObserver ref="subjectSection">
@@ -42,7 +42,7 @@
                 </ValidationObserver>
               </b-step-item>
               <b-step-item
-                step="2"
+                icon="calendar-alt"
                 label="Preference"
               >
                 <ValidationObserver ref="preferenceSection">
@@ -128,7 +128,7 @@
                 </ValidationObserver>
               </b-step-item>
               <b-step-item
-                step="3"
+                icon="home"
                 label="Coaching Location"
               >
                 <ValidationObserver ref="typeSection">
@@ -182,7 +182,7 @@
                 </ValidationObserver>
               </b-step-item>
               <b-step-item
-                step="4"
+                icon="id-card"
                 label="Personal Information"
               >
                 <ValidationObserver ref="informationSection">
@@ -228,7 +228,7 @@
                 </ValidationObserver>
               </b-step-item>
               <b-step-item
-                step="5"
+                icon="location-arrow"
                 label="Location"
               >
                 <ValidationObserver ref="locationSection">
@@ -278,7 +278,7 @@
                 </ValidationObserver>
               </b-step-item>
               <b-step-item
-                step="6"
+                icon="thumbs-up"
                 label="Thank You"
               >
                 <h1>That's all, thank you!</h1>
