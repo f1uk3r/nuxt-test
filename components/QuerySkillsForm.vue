@@ -437,6 +437,12 @@ export default {
     }
   },
   computed: {
+    locationMessage () {
+      if (this.form.location === '') {
+        return 'This field is required'
+      }
+      return null
+    },
     subjectListFinal () {
       if (this.form.standard === 'computer-basics') {
         return this.computerBasicsSubjects
