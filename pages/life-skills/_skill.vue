@@ -1,13 +1,16 @@
 <template>
-  <query-hobbies-skills-form />
+  <query-skills-form />
 </template>
 
 <script>
-import QueryHobbiesSkillsForm from '../../components/QueryHobbiesSkillsForm.vue'
+import QuerySkillsForm from '../../components/QuerySkillsForm.vue'
 
 export default {
   components: {
-    QueryHobbiesSkillsForm
+    QuerySkillsForm
+  },
+  validate ({ params }) {
+    return /^computer-basics$|^learn-language$|^speaking-english$/.test(params.skill)
   }
 }
 </script>

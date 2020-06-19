@@ -1,13 +1,13 @@
 <template>
-  <query-hobbies-skills-form />
+  <query-hobbies-form />
 </template>
 
 <script>
-import QueryHobbiesSkillsForm from '../../components/QueryHobbiesSkillsForm.vue'
+import QueryHobbiesForm from '../../components/QueryHobbiesForm.vue'
 
 export default {
   components: {
-    QueryHobbiesSkillsForm
+    QueryHobbiesForm
   },
   validate ({ params }) {
     return /^art-craft$|^classical-dance$|^cooking$|^western-dance$|^guitar$|^indian-instrument$|^vocal$|^western-instrument$/.test(params.hobby)
