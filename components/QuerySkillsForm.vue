@@ -47,7 +47,6 @@
               >
                 <ValidationObserver ref="preferenceSection">
                   <form-dropdown
-                    v-if="form.standard === 'guitar' || form.standard === 'vocal' || form.standard === 'indian-instrument' || form.standard === 'western-instrument' || form.standard === 'learn-language'"
                     v-model="form.level"
                     label="Your current Knowledge/Skill level."
                     rules="required"
@@ -339,7 +338,7 @@ import FormInput from './FormInput.vue'
 import FormCheckbox from './FormCheckbox.vue'
 
 export default {
-  name: 'QueryHobbiesSkillsForm',
+  name: 'QuerySkillsForm',
   components: {
     ValidationObserver,
     FormDropdown,
@@ -352,7 +351,7 @@ export default {
       form: {
         fees: 1000,
         category: 'Hobbies and Life Skills',
-        standard: this.$route.params.hobby,
+        standard: this.$route.params.skill,
         subjects: [],
         level: '',
         type_coaching: '',
@@ -414,54 +413,12 @@ export default {
         { value: 'intermediate', text: 'Intermediate' },
         { value: 'advanced', text: 'Advanced' }
       ],
-      artSubjects: [
-        'Art for Kids',
-        'Calligraphy',
-        'Canvas Painting',
-        'Charcoal Painting',
-        'Basic Sketching',
-        'Oil Painting',
-        'Watercolor Painting',
-        'Pencil Sketching',
-        'Glass Painting',
-        'Jewellery Design',
-        'Knitting Classes',
-        'Mehendi Designing'
-      ],
-      classicalDanceSubjects: [
-        'Bhangra',
-        'Kathak',
-        'Bharatnatyam',
-        'Ghoomer',
-        'Kalbeliya',
-        'Other Classical Dances'
-      ],
       computerBasicsSubjects: [
         'Basic Computer Skill',
         'Basic Web Designing',
         'Learn Tally',
         'Microsoft Office',
         'Essential Computer Skills'
-      ],
-      cookingSubjects: [
-        'Cooking',
-        'Baking'
-      ],
-      westernDanceSubjects: [
-        'Anybody Can Dance',
-        'Bollywood Dance',
-        'Jazz Dance',
-        'Hip Hop',
-        'Belly Dance',
-        'B-Boying',
-        'Contemporary Dance',
-        'Wedding Choreography'
-      ],
-      guitarSubjects: [
-        'Acoustic Guitar',
-        'Bass Guitar',
-        'Electric Guitar',
-        'Not Sure Yet'
       ],
       languageSubjects: [
         'English',
@@ -472,84 +429,31 @@ export default {
         'Bengali',
         'Gujarati'
       ],
-      indianInstrumentSubjects: [
-        'Tabla',
-        'Dholak',
-        'Harmonium',
-        'Veena',
-        'Mradanga',
-        'Sitar',
-        'Bansuri'
-      ],
       speakEnglishSubjects: [
         'Improve Public Speaking',
         'Spoken English',
         'English for Everyone'
-      ],
-      vocalSubjects: [
-        'Bollywood Vocal',
-        'Indian Classical Vocal',
-        'Western Vocal'
-      ],
-      westerInstrumentSubjects: [
-        'Violin',
-        'Keyboard',
-        'Mouth Organ',
-        'Flute',
-        'Drums'
       ]
     }
   },
   computed: {
     subjectListFinal () {
-      if (this.form.standard === 'art-craft') {
-        return this.artSubjects
-      } else if (this.form.standard === 'classical-dance') {
-        return this.classicalDanceSubjects
-      } else if (this.form.standard === 'computer-basics') {
+      if (this.form.standard === 'computer-basics') {
         return this.computerBasicsSubjects
-      } else if (this.form.standard === 'cooking') {
-        return this.cookingSubjects
-      } else if (this.form.standard === 'western-dance') {
-        return this.westernDanceSubjects
-      } else if (this.form.standard === 'guitar') {
-        return this.guitarSubjects
       } else if (this.form.standard === 'learn-language') {
         return this.languageSubjects
-      } else if (this.form.standard === 'indian-instrument') {
-        return this.indianInstrumentSubjects
       } else if (this.form.standard === 'speaking-english') {
         return this.speakEnglishSubjects
-      } else if (this.form.standard === 'vocal') {
-        return this.vocalSubjects
-      } else if (this.form.standard === 'western-instrument') {
-        return this.westerInstrumentSubjects
       }
       return null
     },
     subjectQuestionFinal () {
-      if (this.form.standard === 'art-craft') {
-        return 'Which of the following Artform(s) do you need help with?'
-      } else if (this.form.standard === 'classical-dance') {
-        return 'Which of the following Dance-form(s) do you need help with?'
-      } else if (this.form.standard === 'computer-basics') {
+      if (this.form.standard === 'computer-basics') {
         return 'Which of the following Computer Skill(s) do you need help with?'
-      } else if (this.form.standard === 'cooking') {
-        return 'Which of the following do you need help with?'
-      } else if (this.form.standard === 'western-dance') {
-        return 'Which of the following Dance-form(s) do you need help with?'
-      } else if (this.form.standard === 'guitar') {
-        return 'Which of the following Guitar skill(s) do you need help with?'
       } else if (this.form.standard === 'learn-language') {
         return 'Which of the following language(s) do you need help with?'
-      } else if (this.form.standard === 'indian-instrument') {
-        return 'Which of the following Instrument(s) do you need help with?'
       } else if (this.form.standard === 'speaking-english') {
         return 'Which of the following do you need help with?'
-      } else if (this.form.standard === 'vocal') {
-        return 'Which of the following Singing-form(s) do you need help with?'
-      } else if (this.form.standard === 'western-instrument') {
-        return 'Which of the following Instrument(s) do you need help with?'
       }
       return null
     }
