@@ -633,7 +633,7 @@ export default {
       this.form.travel = ''
     },
     addQuery () {
-      this.$axios.#post('/student-query/', {
+      this.$axios.$post('/sport-query/', {
         fees: this.form.fees,
         category: this.form.category,
         standard: this.form.standard,
