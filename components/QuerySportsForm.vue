@@ -150,7 +150,7 @@
               >
                 <ValidationObserver ref="typeSection">
                   <form-dropdown
-                    v-if="numberOfStudent"
+                    v-if="form.number_of_student"
                     v-model="form.type_coaching"
                     label="How would you prefer to learn?"
                     rules="required"
@@ -633,34 +633,32 @@ export default {
       this.form.travel = ''
     },
     addQuery () {
-      /* this.$axios.post('/student-query/', {
-        data: {
-          fees: this.form.fees,
-          category: this.form.category,
-          standard: this.form.standard,
-          subjects: this.form.subjects,
-          level: this.form.level,
-          type_coaching: this.form.type_coaching,
-          travel: this.form.travel,
-          number_of_student: this.form.number_of_student,
-          coaching_location: this.form.coaching_location,
-          days: this.form.days,
-          gender_preference: this.form.gender_preference,
-          location: this.form.location,
-          address: this.form.address,
-          landmark: this.form.landmark,
-          name: this.form.name,
-          age: parseInt(this.form.age),
-          contact: this.form.contact,
-          email: this.form.email,
-          student_gender: this.form.gender,
-          comment: this.form.comment
-        }
+      this.$axios.#post('/student-query/', {
+        fees: this.form.fees,
+        category: this.form.category,
+        standard: this.form.standard,
+        subjects: this.form.subjects,
+        level: this.form.level,
+        type_coaching: this.form.type_coaching,
+        travel: this.form.travel,
+        number_of_student: this.form.number_of_student,
+        coaching_location: this.form.coaching_location,
+        days: this.form.days,
+        gender_preference: this.form.gender_preference,
+        location: this.form.location,
+        address: this.form.address,
+        landmark: this.form.landmark,
+        name: this.form.name,
+        age: parseInt(this.form.age),
+        contact: this.form.contact,
+        email: this.form.email,
+        student_gender: this.form.gender,
+        comment: this.form.comment
+      })
         .then(this.resetData())
         .catch((error) => {
           console.log(error)
-        }) */
-      this.resetData()
+        })
     },
     resetData () {
       this.$refs.form.reset()

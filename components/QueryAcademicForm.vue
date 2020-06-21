@@ -230,7 +230,7 @@
                     Previous
                   </b-button>
                   <b-button
-                    v-if="step!==3 || step!==4"
+                    v-if="step<3"
                     outlined
                     type="is-info"
                     icon-pack="fas"
@@ -376,11 +376,11 @@ export default {
         days: [],
         gender_preference: '',
         location: '',
-        address: '',
-        landmark: '',
-        name: '',
-        contact: '',
-        email: ''
+        address: 'Vaishali Nagar',
+        landmark: 'Sharmaji',
+        name: 'Umang',
+        contact: '8967761400',
+        email: 'agarwal.umang4321@gmail.com'
       },
       daysRaw: ''
     }
@@ -511,28 +511,24 @@ export default {
       })
     },
     addQuery () {
-      /* this.$axios.post('/student-query/', {
-        data: {
-          fees: this.form.fees,
-          category: this.form.category,
-          standard: this.form.standard,
-          subjects: this.form.subjects,
-          board: this.form.board,
-          days: this.form.days,
-          gender_preference: this.form.gender_preference,
-          location: this.form.location,
-          address: this.form.address,
-          landmark: this.form.landmark,
-          name: this.form.name,
-          contact: this.form.contact,
-          email: this.form.email
-        }
+      this.$axios.$post('/student-query/', {
+        category: this.form.category,
+        standard: this.form.standard,
+        subjects: this.form.subjects,
+        board: this.form.board,
+        days: this.form.days,
+        gender_preference: this.form.gender_preference,
+        location: this.form.location,
+        address: this.form.address,
+        landmark: this.form.landmark,
+        name: this.form.name,
+        contact: this.form.contact,
+        email: this.form.email
       })
         .then(this.resetData())
         .catch((error) => {
           console.log(error)
-        }) */
-      this.resetData()
+        })
     },
     resetData () {
       this.$refs.form.reset()
