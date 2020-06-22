@@ -133,6 +133,34 @@
         </div>
       </div>
     </section>
+
+    <!-- Statistics section starts here -->
+    <section class="stats">
+      <div class="columns">
+        <div class="column is-5 is-offset-1">
+          <img src="../assets/stats-1.png">
+          <p class="stat-number has-text-weight-bold">1800</p>
+          <p class="stat-text">Edhusk Experts</p>
+        </div>
+        <div class="column is-5">
+          <img src="../assets/stats-2.png">
+          <p class="stat-number has-text-weight-bold">&nbsp;450</p>
+          <p class="stat-text">Satisfied Customer</p>
+        </div>
+      </div>
+      <div class="columns">
+        <div class="column is-5 is-offset-1">
+          <img src="../assets/stats-3.png">
+          <p class="stat-number has-text-weight-bold">&nbsp;20k</p>
+          <p class="stat-text">Hours Of Teaching</p>
+        </div>
+        <div class="column is-5">
+          <img src="../assets/stats-4.png">
+          <p class="stat-number has-text-weight-bold">1200</p>
+          <p class="stat-text">Quizzes Conducted</p>
+        </div>
+      </div>
+    </section>
   </div>
 </template>
 
@@ -417,6 +445,43 @@ section.why-us>div>div.column-why-us>img {
   }
   section.why-us>div>div.column-why-us>img {
     left: 3%;
+  }
+}
+/************************ Statistics section start here *************************/
+section.stats {
+  position: relative;
+  padding-top: 50px;
+}
+section.stats>div>div {
+  position: relative;
+  padding: 20px;
+}
+section.stats>div>div>p.stat-number {
+  position: absolute;
+  top: 38%;
+  left: 14%;
+  font-size: 1.5rem;
+}
+section.stats>div>div>p.stat-text {
+  position: absolute;
+  top: 30%;
+  left: 48%;
+  font-size: 1.5rem;
+}
+@media (max-width: 767px) {
+  section.stats>div>div>img {
+    width: 85%;
+    padding-left: 25px;
+  }
+  section.stats>div>div>p.stat-number {
+    top: 40%;
+    left: 15%;
+    font-size: 2rem;
+  }
+  section.stats>div>div>p.stat-text {
+    font-size: 2rem;
+    left: 45
+    %;
   }
 }
 </style>
