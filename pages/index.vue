@@ -78,6 +78,61 @@
       </div>
     </section>
 
+    <!-- Why EdHusk section starts here -->
+    <section class="why-us">
+      <p class="is-size-3 has-text-weight-bold has-text-white has-text-centered">Why EdHusk?</p>
+      <p class="is-size-5 has-text-white has-text-centered">We provide customized learning at student's home</p>
+      <div class="columns first-row">
+        <div class="column is-5 is-offset-1 column-why-us">
+          <img src="../assets/why-us-1.png" width="60" height="60">
+          <div class="why-us-content">
+            <h2 class="is-size-5 has-text-weight-bold">Best Possible Match</h2>
+            <p class="has-text-left">We try to connect you with the most qualified tutors and professionals than anywhere else. We filter our tutors based on your preferences using our advanced matchmaking algorithm. You get to pick your match and the budget.</p>
+          </div>
+        </div>
+        <div class="column is-5 column-why-us">
+          <img src="../assets/why-us-2.png" width="60" height="60">
+          <div class="why-us-content">
+            <h2 class="is-size-5 has-text-weight-bold">Customized Learning</h2>
+            <p class="has-text-left">We have prepared conceptualized course content and 3D models with a holistic approach to understand realistic applications. Continuous learning and properly fashioned revision with periodic assessment helps in quick and higher retention</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="columns">
+        <div class="column is-5 is-offset-1 column-why-us">
+          <img src="../assets/why-us-3.png" width="60" height="60">
+          <div class="why-us-content">
+            <h2 class="is-size-5 has-text-weight-bold">Quality</h2>
+            <p class="has-text-left">We do a comprehensive screening of tutors for subject knowledge and teaching abilities before we hand pick them. You can choose to get tutored either in person or in a batch, which will help you to reach your goals.</p>
+          </div>
+        </div>
+        <div class="column is-5 column-why-us">
+          <img src="../assets/why-us-4.png" width="60" height="60">
+          <div class="why-us-content">
+            <h2 class="is-size-5 has-text-weight-bold">Monitor your Progress</h2>
+            <p class="has-text-left">You can track training progress online with our android app(Coming Soon). Check there for the attendance and constant tutor feedback. You will also get a detailed report on completed sessions every month, followed by test(s).</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="columns">
+        <div class="column is-5 is-offset-1 column-why-us">
+          <img src="../assets/why-us-5.png" width="60" height="60">
+          <div class="why-us-content">
+            <h2 class="is-size-5 has-text-weight-bold">Support and Counselling</h2>
+            <p class="has-text-left">We have an able counselling team with the learning environment of highest standard to monitor the progress of your ward. It is highly unlikely that your tutor is not being able to continue, if such a case arises, we will help you find a quick replacement.</p>
+          </div>
+        </div>
+        <div class="column is-5 column-why-us">
+          <img src="../assets/why-us-6.png" width="60" height="60">
+          <div class="why-us-content">
+            <h2 class="is-size-5 has-text-weight-bold long-title">Hassle-free Services & Payment</h2>
+            <p class="has-text-left long-title-description">Guaranteed, personalized and adaptive services with utmost convenience, just a few clicks away. We have a 15 days payment scheme & 3D secure SSL payment gateway with money back guarantee in case of any discrepancies.</p>
+          </div>
+        </div>
+      </div>
+    </section>
   </div>
 </template>
 
@@ -339,4 +394,29 @@ div.service-acads>ul, div.service-sports>ul, div.service-hobbies>ul {
   }
 }
 
+/************************Why EdHusk section starts here************************/
+section.why-us {
+  position: relative;
+  background-color: #459bee;
+}
+section.why-us>div.columns.first-row {
+  padding-top: 10px;
+}
+section.why-us>div>div.column-why-us {
+  position: relative;
+  padding-left: 70px;
+}
+section.why-us>div>div.column-why-us>img {
+  position: absolute;
+  top: 15%;
+  left: 0%;
+}
+@media (max-width: 767px) {
+  section.why-us>div>div.column-why-us {
+    padding: 10px 50px 10px 95px;
+  }
+  section.why-us>div>div.column-why-us>img {
+    left: 3%;
+  }
+}
 </style>
