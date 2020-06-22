@@ -1,116 +1,342 @@
 <template>
-  <div class="academic-form">
-    <div class="relative-container">
-      <div class="whole-form">
-        <form action="post">
-          <div class="field">
-            <p class="has-text-left is-size-4">
-              Which of the subject(s) does the student need help with?
-            </p>
-            <!--<form-checkbox rules="required" name="subjects" label="Subject">
-              <template v-for="(item,i) in subjectListFinal">
-                <b-checkbox
-                  :key="`${i}-${item}`"
-                  v-model="form.subjects"
-                  :native-value="item"
-                  size="is-medium"
-                >
-                  {{ item }}
-                </b-checkbox>
-                <br :key="`${i}-${item.id}`">
-              </template>
-            </form-checkbox>-->
-            <ValidationProvider :vid="vid" v-slot="{ errors }" name="Subject" rules="required">
-              <div class="block">
-                <template v-for="(item, i) in subjectListFinal">
-                  <b-checkbox
-                    :key="`${i}-${item}`"
-                    v-model="subjects"
-                    :native-value="item"
-                    size="is-medium"
-                  >
-                    {{ item }}
-                  </b-checkbox>
-                  <br :key="`${i}-${item.id}`">
-                </template>
-                <p class="has-text-danger">
-                  {{ errors[0] }}
-                </p>
-              </div>
-            </ValidationProvider>
-          </div>
-        </form>
+  <div>
+    <section class="top-image">
+      <img src="../assets/top-image.png" alt="Banner Image" class="banner">
+      <img src="../assets/top-image-vector.png" alt="Foreground" class="top-banner-vector">
+      <h1 class="has-text-weight-bold is-size-1">Book your own Tutor</h1>
+
+      <!-- First Dropdown -->
+      <div class="field category">
+        <div class="control">
+          <b-select v-model="category" placeholder="Select category">
+            <option value>Select Category</option>
+            <option
+              v-for="(item, index) in optionsCategory"
+              :key="index"
+              :value="item"
+            >
+              {{ item }}
+            </option>
+          </b-select>
+        </div>
       </div>
-    </div>
+
+      <!-- second dropdown -->
+      <div class="field standard">
+        <div class="control">
+          <b-select v-model="formLink" placeholder="Select category first">
+            <option value>Select category First</option>
+            <option
+              v-for="(item, index) in optionFieldComputed"
+              :key="index"
+              :value="item"
+            >
+              {{ item.text }}
+            </option>
+          </b-select>
+        </div>
+      </div>
+      <b-button id="submit" tag="a" :href="formLink" class="is-success">Submit</b-button>
+    </section>
+
+    <!-- Services section starts here -->
+    <section class="services">
+      <div class="columns">
+        <div class="column empty-column" />
+        <div class="column is-12">
+          <div class="columns">
+            <div class="column service-acads">
+              <img src="../assets/1-acadmics-icon.png" width="43" height="44"><h2 class="has-text-weight-bold">Academics</h2>
+              <ul>
+                <li>All Subjects from Pre-Primary to 12<sup>th</sup></li>
+                <li>All Boards (CBSE/IB/ICSE/State Board)</li>
+                <li>Personalised Home Tutions/ Batch of 5</li>
+                <li>Learn from 3-D Models & Videos</li>
+              </ul>
+            </div>
+            <div class="column service-sports">
+              <img src="../assets/2-sports-fitness.png" width="43" height="44"><h2 class="has-text-weight-bold">Sports & Fitness</h2>
+              <ul>
+                <li>Sculpt an Ideal Body with Yoga/Zumba</li>
+                <li>Get fit with our Dieticians and Trainers</li>
+                <li>Popular Indoor and Outdoor Games</li>
+                <li>Get a Coach according to your Needs</li>
+              </ul>
+            </div>
+            <div class="column service-hobbies">
+              <img src="../assets/3-hobbies-life-skills.png" width="43" height="44"><h2 class="has-text-weight-bold">Hobbies & Life-Skills</h2>
+              <ul>
+                <li>Personality Development Courses</li>
+                <li>Learn a New Language</li>
+                <li>All Indian & Western Instruments</li>
+                <li>Courses for all Age Groups</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="column empty-column" />
+      </div>
+    </section>
+
   </div>
 </template>
 
 <script>
-import { ValidationProvider } from 'vee-validate'
 
 export default {
   name: 'HomePage',
-  layout: 'landing',
+  // layout: 'landing',
   components: {
-    ValidationProvider
   },
   data () {
     return {
-      subjectListFinal: [
-        'All Subjects',
-        'Vedic Maths',
-        'Mathematics',
-        'Science',
-        'English',
-        'Hindi',
-        'Environmental Studies',
-        'Mathematics-Science (Combo)',
-        'Handwriting (English/Hindi)'
+      category: '',
+      formLink: '',
+      form: {
+        name: '',
+        number: null
+      },
+      optionsCategory: [
+        'Academics',
+        'Sports and Fitness',
+        'Hobbies and Life-Skills'
       ],
-      subjects: []
+      academicsArray: [
+        { link: '/academics/pre-primary', text: 'Pre Primary' },
+        { link: '/academics/1', text: 'Class 1' },
+        { link: '/academics/2', text: 'Class 2' },
+        { link: '/academics/3', text: 'Class 3' },
+        { link: '/academics/4', text: 'Class 4' },
+        { link: '/academics/5', text: 'Class 5' },
+        { link: '/academics/6', text: 'Class 6' },
+        { link: '/academics/7', text: 'Class 7' },
+        { link: '/academics/8', text: 'Class 8' },
+        { link: '/academics/9', text: 'Class 9' },
+        { link: '/academics/10', text: 'Class 10' },
+        { link: '/academics/11-art', text: 'Class 11 - Arts' },
+        { link: '/academics/11-sci', text: 'Class 11 - Commerce' },
+        { link: '/academics/11-com', text: 'Class 11 - Science' },
+        { link: '/academics/12-art', text: 'Class 12 - Arts' },
+        { link: '/academics/12-com', text: 'Class 12 - Commerce' },
+        { link: '/academics/12-sci', text: 'Class 12 - Science' }
+      ],
+      hobbiesArray: [
+        { link: '/hobbies/art-craft', text: 'Art & Craft' },
+        { link: '/hobbies/classical-dance', text: 'Classical Dance' },
+        { link: '/life-skills/computer-basics', text: 'Computer Basics' },
+        { link: '/hobbies/cooking', text: 'Cooking' },
+        { link: '/hobbies/western-dance', text: 'Western Dance' },
+        { link: '/hobbies/guitar', text: 'Guitar' },
+        { link: '/life-skills/learn-lang', text: 'Learn a Language' },
+        { link: '/hobbies/indian-instrument', text: 'Indian Instrument' },
+        { link: '/life-skills/speaking-english', text: 'Spoken English' },
+        { link: '/hobbies/vocal', text: 'Vocals' },
+        { link: '/hobbies/western-instrument', text: 'Western Instrument' }
+      ],
+      sportsArray: [
+        { link: '/sports/badminton', text: 'Badminton' },
+        { link: '/sports/basketball', text: 'Basketball' },
+        { link: '/sports/chess', text: 'Chess' },
+        { link: '/sports/cricket', text: 'Cricket' },
+        { link: '/fitness/dietician', text: 'Dietician' },
+        { link: '/sports/football', text: 'Football' },
+        { link: '/sports/martial-arts', text: 'Martial Arts' },
+        { link: '/sports/running', text: 'Running' },
+        { link: '/sports/skating', text: 'Skating' },
+        { link: '/sports/swimming', text: 'Swimming' },
+        { link: '/fitness/fitness-trainer', text: 'Fitness Trainer' },
+        { link: '/sports/volleyball', text: 'Volleyball' },
+        { link: '/fitness/yoga', text: 'Yoga' },
+        { link: '/fitness/zumba', text: 'Zumba' }
+      ]
+    }
+  },
+  computed: {
+    optionFieldComputed () {
+      if (this.category === 'Academics') {
+        return this.academicsArray
+      } else if (this.category === 'Sports and Fitness') {
+        return this.sportsArray
+      } else if (this.category === 'Hobbies and Life-Skills') {
+        return this.hobbiesArray
+      }
+      return null
+    },
+    workSectionToggleComputed () {
+      if (this.portfolioCategory === 'all') {
+        return false
+      }
+      return this.workSectionHeightObject
     }
   }
 }
 </script>
 
 <style scope>
-  div.relative-container {
-    background-image: url("../assets/form-academics.jpg");
-    position: absolute;
-    background-size: 100% 100%;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    z-index: 100;
-    margin: 0 10px;
+section.top-image {
+  padding-top: 50px;
+  position: relative;
+}
+section.top-image>img.banner {
+  width: 100%;
+}
+section.top-image>img.top-banner-vector {
+  position: absolute;
+  height: 65%;
+  left: 54%;
+  z-index: 200;
+  top: 13%
+}
+section.top-image>h1 {
+  position: absolute;
+  top: 25%;
+  left: 2%;
+  color: white;
+
+}
+section.top-image>div.field.category {
+  position: absolute;
+  top: 39%;
+  left: 2%;
+}
+section.top-image>div.field.standard {
+  position: absolute;
+  top: 39%;
+  left: 22%
+}
+section.top-image>a#submit {
+  position: absolute;
+  top: 48%;
+  left: 2%
+}
+@media (max-width: 1024px) {
+  section.top-image>h1 {
+    top: 30%;
+    left: 5%;
+    color: white;
+
   }
-  div.whole-form {
-    position: absolute;
-    top: 15%;
+  section.top-image>div.field.category {
+    top: 45%;
+    left: 5%;
+  }
+  section.top-image>div.field.standard {
+    top: 55%;
+    left: 5%
+  }
+  section.top-image>a#submit {
+    top: 50%;
+    left: 35%
+  }
+}
+@media (max-width: 900px) {
+  section.top-image>img.top-banner-vector {
+    display: none;
+  }
+  section.top-image>h1 {
+    top: 25%;
     left: 10%;
-    width: 80%;
-    height: 80%;
-    background-color: white;
-    border-radius: 5px;
+    color: white;
+
   }
-  form {
-    padding: 10px;
-    overflow-y: scroll;
-    height: 80%;
+  section.top-image>div.field.category {
+    top: 40%;
+    left: 10%;
   }
-  div.progress-wrapper {
-    padding: 10px 10px 0 10px;
+  section.top-image>div.field.standard {
+    top: 50%;
+    left: 10%
   }
-  form>div.form-field>div.field>p {
-    padding-bottom: 15px;
+  section.top-image>a#submit {
+    top: 45%;
+    left: 45%
   }
-  div.whole-form > div.field.is-grouped {
-    position: absolute;
-    bottom: 10px;
-    padding: 10px;
+}
+@media (max-width: 767px) {
+  section.top-image>h1 {
+    top: 15%;
+    color: white;
+
   }
-  div.whole-form > div.field.is-grouped > button.button {
-    margin: 5px;
+  section.top-image>div.field.category {
+    left: 15%;
   }
+  section.top-image>div.field.standard {
+    top: 55%;
+    left: 15%
+  }
+  section.top-image>a#submit {
+    left: 55%
+  }
+}
+@media (max-width: 600px) {
+  section.top-image>img.banner {
+    display: none;
+  }
+  section.top-image {
+    background-color: #459bee;
+    height: 300px;
+  }
+  section.top-image>h1 {
+    top: 15%;
+    left: 5%;
+    color: white;
+
+  }
+  section.top-image>div.field.category {
+    top: 50%;
+    left: 15%;
+  }
+  section.top-image>div.field.standard {
+    top: 65%;
+    left: 15%
+  }
+  section.top-image>a#submit {
+    top: 55%;
+    left: 70%
+  }
+}
+@media (max-width: 500px) {
+  section.top-image>div.field.category {
+    top: 65%;
+    left: 8%;
+  }
+  section.top-image>div.field.standard {
+    top: 80%;
+    left: 8%
+  }
+  section.top-image>a#submit {
+    top: 72%;
+    left: 70%
+  }
+}
+
+/******************* Services section starts here ***********************/
+section.services {
+  position: relative;
+  padding: 50px 20px 20px;
+}
+div.service-acads, div.service-sports, div.service-hobbies {
+  position: relative;
+  height: 225px;
+}
+div.service-acads>img, div.service-sports>img, div.service-hobbies>img {
+  position: absolute;
+  left: 5%;
+}
+div.service-acads>h2, div.service-sports>h2, div.service-hobbies>h2 {
+  position: absolute;
+  left: 20%;
+}
+div.service-acads>ul, div.service-sports>ul, div.service-hobbies>ul {
+  position: absolute;
+  top: 30%;
+  left: 5%;
+}
+@media (max-width: 767px) {
+  div.service-acads, div.service-sports, div.service-hobbies {
+    height: 200px;
+  }
+}
+
 </style>
