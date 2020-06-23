@@ -161,6 +161,69 @@
         </div>
       </div>
     </section>
+
+    <!-- How it works section starts here -->
+    <section class="work">
+      <img src="../assets/how-it-works-1.png" alt="How It Works 1" class="image-one">
+      <img src="../assets/how-it-works-2.png" alt="How It Works 2" class="image-two">
+      <img src="../assets/how-it-works-3.png" alt="How It Works 3" class="image-three">
+      <img src="../assets/how-it-works-background.png" alt="How It Works Background" class="image-background">
+      <div class="title-block">
+        <p>How It Works</p>
+      </div>
+      <div class="text-block text-block-one">
+        <h1>Answer a few personalized questions</h1>
+        <p>Tell us a few things about yourself and we'll introduce you to experts who are the most suitable matches for you.</p>
+      </div>
+      <div class="text-block text-block-two">
+        <h1>Book a demo with your perfect match</h1>
+        <p>We will contact you within 24 hours to book a demo class with your perfect match. We guarantee that you'll love your first lesson. If not, we'll cover the first session.</p>
+      </div>
+      <div class="text-block text-block-three">
+        <h1>Accept and Subscribe</h1>
+        <p>If you are satisfied with the approach and depth of your instructor's knowledge, you can start one of its kind EdHusk experience.</p>
+      </div>
+      <div class="section-ladders">
+        <div class="start-block">
+          <div class="start-triangle" />
+        </div>
+        <div class="numbered-square number-one">
+          <div class="hollow-circle circle-one">
+            <p>1</p>
+          </div>
+        </div>
+        <div class="sector sector-one">
+          <div class="sector-cut-out sector-cut-out-one" />
+        </div>
+        <div class="white-square square-one" />
+        <div class="white-square square-two" />
+        <div class="white-square square-three" />
+        <div class="white-square square-four" />
+        <div class="white-square square-five" />
+        <div class="sector sector-two">
+          <div class="sector-cut-out sector-cut-out-two" />
+        </div>
+        <div class="numbered-square number-two">
+          <div class="hollow-circle circle-two">
+            <p>2</p>
+          </div>
+        </div>
+        <div class="sector sector-three">
+          <div class="sector-cut-out sector-cut-out-three" />
+        </div>
+        <div class="white-square square-six" />
+        <div class="white-square square-seven" />
+        <div class="white-square square-eight" />
+        <div class="sector sector-four">
+          <div class="sector-cut-out sector-cut-out-four" />
+        </div>
+        <div class="numbered-square number-three">
+          <div class="hollow-circle circle-three">
+            <p>3</p>
+          </div>
+        </div>
+      </div>
+    </section>
   </div>
 </template>
 
@@ -480,8 +543,301 @@ section.stats>div>div>p.stat-text {
   }
   section.stats>div>div>p.stat-text {
     font-size: 2rem;
-    left: 45
-    %;
+    left: 45%;
   }
+}
+/************************How it works section starts here************************/
+section.work {
+  position: relative;
+}
+section.work>img.image-background {
+  width: 100%;
+  z-index: -1;
+}
+section.work>img.image-one {
+  position: absolute;
+  left: 2%;
+  width: 6%;
+  top: 5%;
+}
+section.work>img.image-two {
+  position: absolute;
+  left: 83%;
+  width: 15%;
+  top: 38%;
+}
+section.work>img.image-three {
+  position: absolute;
+  left: 18%;
+  width: 9%;
+  top: 65%;
+}
+section.work>div.title-block {
+  position: absolute;
+  left: 30%;
+  top: 0%;
+  color: white;
+  font-size: 7vw;
+}
+section.work>div.text-block {
+  position: absolute;
+  text-align: left;
+}
+section.work>div.text-block>h1 {
+  font-size: 2vw;
+}
+section.work>div.text-block>p {
+  color: white;
+  font-size: 1.8vw;
+}
+section.work>div.text-block-one {
+  top: 13%;
+  left: 25%;
+  width: 50%
+}
+section.work>div.text-block-two {
+  top: 40%;
+  left: 20%;
+  width: 50%
+}
+section.work>div.text-block-three {
+  top: 70%;
+  left: 42%;
+  width: 50%
+}
+section.work>div.section-ladders {
+  position: absolute;
+  width: 90%;
+  height: 80%;
+  top: 0%;
+  left: 10%;
+}
+section.work>div>div.start-block {
+  position: absolute;
+  height: 16%;
+  width: 10%;
+  z-index: 110;
+  top: 0.5%;
+  background-color: white;
+}
+section.work>div>div>div.start-triangle {
+  position: absolute;
+  z-index: 125;
+  border-left: 1.5rem solid transparent;
+  border-right: 1.5rem solid transparent;
+  border-top: 1.5rem solid grey;
+  top: 40%;
+  left: 20%;
+}
+section.work>div>div.numbered-square {
+  position: absolute;
+  height: 14%;
+  width: 10%;
+  background-color: black;
+  z-index: 110;
+}
+section.work>div>div.number-one {
+  top: 17%;
+}
+section.work>div>div>div.hollow-circle {
+  position: absolute;
+  z-index: 125;
+  border-radius: 50%;
+  height: 90%;
+  width: 90%;
+  border: 5px solid white;
+  left: 5%;
+  top:5%;
+}
+section.work>div.section-ladders>div>div>p {
+  position: absolute;
+  color: white;
+  top: -30%;
+  left: 24%;
+  font-size: 7vw;
+}
+div.sector {
+  position: absolute;
+  background-color: white;
+  height: 17%;
+  width: 13%;
+  z-index: 110;
+}
+div.sector-cut-out {
+  position: absolute;
+  background-color: #459bee;
+  z-index: 125;
+  width: 25%;
+  height: 25%;
+}
+div.sector-one {
+  top: 31.5%;
+  border-bottom-left-radius: 100%;
+}
+div.sector-cut-out-one {
+  left: 77%;
+  top: -5%;
+  border-bottom-left-radius: 100%;
+}
+div.white-square {
+  position: absolute;
+  height: 14%;
+  width: 10%;
+  background-color: white;
+  z-index: 110;
+}
+div.square-one {
+  left: 13.5%;
+  top: 34.5%;
+}
+div.square-two {
+  left: 24%;
+  top: 34.5%;
+}
+div.square-three {
+  left: 34.5%;
+  top: 34.5%;
+}
+div.square-four {
+  left: 45%;
+  top: 34.5%;
+}
+div.square-five {
+  left: 55.5%;
+  top: 34.5%;
+}
+div.sector-two {
+  top: 34.5%;
+  left: 66%;
+  border-top-right-radius: 100%;
+}
+div.sector-cut-out-two {
+  top: 80%;
+  left: -3%;
+  border-top-right-radius: 100%;
+}
+div.number-two {
+  top: 52.5%;
+  left: 69%;
+}
+div.sector-three {
+  top: 67.5%;
+  left: 66%;
+  border-bottom-right-radius: 100%;
+}
+div.sector-cut-out-three {
+  left: -3%;
+  top: -3%;
+  border-bottom-right-radius: 100%;
+}
+div.square-six {
+  left: 55.5%;
+  top: 71%;
+}
+div.square-seven {
+  left: 45%;
+  top: 71%;
+}
+div.square-eight {
+  left: 34.5%;
+  top: 71%;
+}
+div.sector-four {
+  top: 71%;
+  left: 21%;
+  border-top-left-radius: 100%;
+}
+div.sector-cut-out-four {
+  top: 80%;
+  left: 77%;
+  border-top-left-radius: 100%;
+}
+div.number-three {
+  left: 21%;
+  top: 89%;
+}
+@media (max-width: 767px) {
+  div.sector, div.square-three, div.square-four, div.square-five, div.square-six, div.square-seven, div.square-eight {
+    display: none;
+  }
+  section.work>div.section-ladders {
+    left: 15%;
+  }
+  section.work>div>div.start-block {
+    height: 20%;
+    width: 11%;
+  }
+  section.work>div>div.numbered-square {
+    height: 15%;
+    width: 11%;
+    background-color: black;
+    z-index: 110;
+  }
+  section.work>div.section-ladders>div>div>p {
+    top: -35%;
+    left: 20%;
+    font-size: 8vw;
+  }
+  div.white-square {
+    height: 15%;
+    width: 11%;
+  }
+  section.work>div>div.number-one {
+    top: 21.5%;
+  }
+  div.square-one {
+    left: 0%;
+    top: 37.5%;
+  }
+  section.work>div>div.number-two {
+    left: 0%;
+    top: 53.5%;
+  }
+  div.square-two {
+    left: 0%;
+    top: 69.5%;
+  }
+  section.work>div>div.number-three {
+    left: 0%;
+    top: 85.5%;
+  }
+  section.work>div.text-block>h1 {
+    font-size: 3vw;
+  }
+  section.work>div.text-block>p {
+    color: white;
+    font-size: 2vw;
+  }
+  section.work>div.text-block-one {
+    top: 15%;
+    left: 28%;
+    width: 70%
+  }
+  section.work>div.text-block-two {
+    top: 40%;
+    left: 28%;
+    width: 70%
+  }
+  section.work>div.text-block-three {
+    top: 67%;
+    left: 28%;
+    width: 70%
+  }
+  section.work>img.image-one {
+    left: 5%;
+    width: 6%;
+    top: 8%;
+  }
+  section.work>img.image-two {
+    left: 1%;
+    width: 13%;
+    top: 41%;
+  }
+  section.work>img.image-three {
+    left: 3%;
+    width: 9%;
+    top: 66%;
+  }
+
 }
 </style>
