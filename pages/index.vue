@@ -390,20 +390,123 @@
         </div>
       </div>
     </section>
+
+    <section class="call-back">
+      <p class="is-size-3 has-text-weight-bold has-text-grey container has-text-centered">Request a Call Back</p>
+      <p class="is-size-5 has-text-grey container has-text-centered">Get <button class="button is-outlined is-primary" @click="callback = !callback">free counselling</button> by our IIT Kharagpur Team</p>
+      <div class="card container" v-if="callback">
+        <header class="card-header">
+          <p class="card-header-title ">Request a Callback</p>
+        </header>
+        <div class="container card-content" v-if="callback">
+          <div class="content">
+            <ValidationObserver ref="callbackForm">
+              <form-input
+                key="name"
+                v-model="form.name"
+                vid="name"
+                type="text"
+                label="Name"
+                rules="required"
+                placeholder="Enter your name"
+              />
+
+              <form-input
+                key="contact"
+                v-model="form.contact"
+                vid="contact"
+                type="tel"
+                label="Contact(Mobile) Number"
+                rules="required|digits:10"
+                placeholder="Please enter 10 digit mobile number"
+              />
+            </ValidationObserver>
+          </div>
+        </div>
+        <footer class="card-footer">
+          <a @click.prevent="validateBeforeSubmit" class="card-footer-item">Save</a>
+          <a href="#" class="card-footer-item">Cancel</a>
+        </footer>
+      </div>
+    </section>
+
+    <footer class="footer">
+      <div class="columns">
+        <div class="column empty-column"></div>
+        <div class="column is-11">
+          <div class="columns">
+            <div class="column footer-information">
+              <div>
+                <span class="icon is-medium"><a style="color: white;" href="https://www.facebook.com/edhuskindia/"><i class="fab fa-facebook fa-2x"></i></a></span>
+                <span class="icon is-medium"><a style="color: white;" href="https://twitter.com/edhusk_com"><i class="fab fa-twitter fa-2x"></i></a></span>
+                <span class="icon is-medium"><a style="color: white;" href="https://www.instagram.com/edhusk.india/"><i class="fab fa-instagram fa-2x"></i></a></span>
+              </div>
+
+              <div class="address">
+                <p class="address-title has-text-weight-bold">Contact Us</p>
+                <p>Edhusk Pvt. Ltd.</p>
+                <p>A-469, Vaishali Nagar</p>
+                <p>Jaipur, 302021</p>
+              </div>
+
+              <div class="contact-details">
+                <p>0141-4916128</p>
+                <p>+91-7585965858</p>
+                <p>+91-8764227181</p>
+              </div>
+              <a href="/tutor/" class="button is-primary">Become a Tutor</a>
+            </div>
+            <div class="column footer-links">
+              <a href="/academics/1" class="footer-link">Home tutor for Class 1</a><br/>
+              <a href="/academics/5" class="footer-link">Home tutor for Class 5</a><br/>
+              <a href="/academics/6" class="footer-link">Home tutor for Class 6</a><br/>
+              <a href="/academics/8" class="footer-link">Home tutor for Class 8</a><br/>
+              <a href="/academics/9" class="footer-link">Home tutor for Class 9</a><br/>
+              <a href="/academics/10" class="footer-link">Home tutor for Class 10</a><br/>
+              <a href="/academics/11-sci" class="footer-link">Home tutor for Class 11 - Science</a><br/>
+              <a href="/academics/11-com" class="footer-link">Home tutor for Class 11 - Commerce</a><br/>
+              <a href="/sports/chess" class="footer-link">Book Coach for Chess</a><br/>
+              <a href="/sports/cricket" class="footer-link">Book Coach for Cricket</a>
+            </div>
+            <div class="column footer-links">
+              <a href="/sports/martial-arts" class="footer-link">Book Coach for Martial Arts</a><br/>
+              <a href="/fitness/dietician" class="footer-link">Book a Dietician</a><br/>
+              <a href="/fitness/yoga" class="footer-link">Book an Instructor for Yoga</a><br/>
+              <a href="/fitness/zumba" class="footer-link">Book an Instructor for Zumba</a><br/>
+              <a href="/hobbies/art-craft" class="footer-link">Home tutor for Art & Craft</a><br/>
+              <a href="/life-skills/computer-basics" class="footer-link">Home tutor for Computer Basics</a><br/>
+              <a href="/hobbies/western-dance" class="footer-link">Book Instructor for Western Dance</a><br/>
+              <a href="/hobbies/guitar" class="footer-link">Book Instructor for Guitar</a><br/>
+              <a href="/life-skills/speaking-english" class="footer-link">Home tutor for Spoken English</a><br/>
+              <a href="/hobbies/western-instrument" class="footer-link">Book Instructor for Western Instrument</a>
+            </div>
+          </div>
+          <p><span class="has-text-weight-bold">Home Tuition across Jaipur: </span>Ajmer Road / Ambabari / Bani Park / Bapu Nagar / Barkat Nagar / Chitrakoot / C-Scheme / Civil Lines / Durgapura / Gandhinagar / Gopalpura By Pass / Jagatpura / Jhotwara / Khatipura / Lal Kothi / Mahesh Nagar / Malviya Nagar / Mansarovar / New Sanganer Road / Nirman Nagar / Pratap Nagar / Raja Park / SFS Mansarovar / Shastri Nagar / Shyam Nagar / Sindhi Camp / Sodala / Tonk Phatak / Vaishali Nagar / Vidhyadhar Nagar</p>
+        </div>
+        <div class="column empty-column"></div>
+      </div>
+      <hr class="is-white">
+      <div class="container copyright has-text-centered"><p>© 2017 Edhusk Pvt. Ltd. All Rights Reserved</p></div>
+    </footer>
   </div>
 </template>
 
 <script>
+import { ValidationObserver } from 'vee-validate'
+import FormInput from '../components/FormInput.vue'
 
 export default {
   name: 'HomePage',
   // layout: 'landing',
   components: {
+    ValidationObserver,
+    FormInput
   },
   data () {
     return {
       category: '',
       formLink: '',
+      callback: false,
       portfolioCategory: 'all',
       form: {
         name: '',
@@ -480,6 +583,28 @@ export default {
         return false
       }
       return this.workSectionHeightObject
+    }
+  },
+  methods: {
+    validateBeforeSubmit () {
+      this.$refs.callbackForm.validate().then((success) => {
+        if (success) {
+          this.addCallbackQuery()
+        }
+      })
+      console.log('ho raha hai')
+    },
+    addCallbackQuery () {
+      this.$axios.$post('/request-callback/', {
+        name: this.form.name,
+        contact: this.form.contact
+      })
+        .then(
+          console.log('ho gaya')
+        )
+        .catch((error) => {
+          console.log(error)
+        })
     }
   }
 }
@@ -627,7 +752,7 @@ section.top-image>a#submit {
 /******************* Services section starts here ***********************/
 section.services {
   position: relative;
-  padding: 50px 20px 20px;
+  padding: 50px 20px 30px;
 }
 div.service-acads, div.service-sports, div.service-hobbies {
   position: relative;
@@ -656,6 +781,8 @@ div.service-acads>ul, div.service-sports>ul, div.service-hobbies>ul {
 section.why-us {
   position: relative;
   background-color: #459bee;
+  padding-top: 4rem;
+  padding-bottom: 6rem;
 }
 section.why-us>div.columns.first-row {
   padding-top: 10px;
@@ -680,7 +807,7 @@ section.why-us>div>div.column-why-us>img {
 /************************ Statistics section start here *************************/
 section.stats {
   position: relative;
-  padding-top: 50px;
+  padding: 50px;
 }
 section.stats>div>div {
   position: relative;
@@ -1010,6 +1137,8 @@ div.number-three {
 /********************* Portfolio section starts here *********************/
 section.portfolio {
   position: relative;
+  padding-top: 30px;
+  padding-bottom: 50px;
 }
 section.portfolio>div.container.has-text-centered {
   padding-bottom: 2rem;
@@ -1045,6 +1174,35 @@ section.portfolio>div.portfolio-category>div>div>div>div:hover a {
   section.portfolio>div.portfolio-category>div>div>div>div>img {
     width: 60%;
     margin-left: 20%;
+  }
+}
+
+section.call-back {
+  padding: 10px 20px 30px;
+}
+
+footer.footer {
+  background-color: #459bee;
+}
+footer.footer>div>div>div>div>div>p {
+  color: white;
+}
+footer.footer>div>div>div>div>div.address, footer.footer>div>div>div>div>div.contact-details {
+  margin-top: 20px;
+}
+footer.footer>div>div>div>div>a {
+  margin-top: 20px;
+}
+footer.footer>div>div>div>div>a.footer-link {
+  font-size: 1.6vw;
+  color: white;
+}
+@media (max-width: 767px) {
+  footer.footer>div>div>div>div.footer-links, footer.footer>div>div>div>div.footer-information {
+    text-align: center;
+  }
+  footer.footer>div>div>div>div>a.footer-link {
+    font-size: 2vw;
   }
 }
 </style>
