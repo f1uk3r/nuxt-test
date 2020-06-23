@@ -224,6 +224,172 @@
         </div>
       </div>
     </section>
+
+    <section class="portfolio">
+      <p class="is-size-3 has-text-weight-bold has-text-grey has-text-centered">Our Popular Services</p>
+      <div class="container has-text-centered">
+        <a class="button is-outlined all is-link" @click="portfolioCategory='all'">All</a>
+        <a class="button is-outlined academics is-link" @click="portfolioCategory='academics'">Academics</a>
+        <a class="button is-outlined sports-fitness is-link" @click="portfolioCategory='sports'">Sports & Fitness</a>
+        <a class="button is-outlined hobbies-lifeskill is-link" @click="portfolioCategory='hobbies'">Hobbies & Life Skills</a>
+      </div>
+
+      <div class="portfolio-category" v-if="portfolioCategory==='all'">
+        <div class="columns">
+          <div class="column empty-column"></div>
+          <div class="column is-10">
+            <div class="columns">
+              <div class="column">
+                <img src="../assets/portfolio-1.png" alt="Art & Craft" class="portfolio-1"/>
+                <a href="/hobbies/art-craft" class="button is-primary">Book Demo</a>
+              </div>
+              <div class="column">
+                <img src="../assets/portfolio-2.png" alt="Guitar" class="portfolio-2"/>
+                <a href="/hobbies/guitar" class="button is-primary">Book Demo</a>
+              </div>
+              <div class="column">
+                <img src="../assets/portfolio-3.png" alt="Spoken English" class="portfolio-3"/>
+                <a href="/life-skills/speaking-english" class="button is-primary">Book Demo</a>
+              </div>
+              <div class="column">
+                <img src="../assets/portfolio-4.png" alt="Class 6" class="portfolio-4"/>
+                <a href="/academics/6" class="button is-primary">Book Demo</a>
+              </div>
+            </div>
+          </div>
+          <div class="column empty-column"></div>
+        </div>
+        <div class="columns">
+          <div class="column empty-column"></div>
+          <div class="column is-10">
+            <div class="columns">
+              <div class="column">
+                <img src="../assets/portfolio-5.png" alt="Western Dance" class="portfolio-5"/>
+                <a href="/hobbies/western-dance" class="button is-primary">Book Demo</a>
+              </div>
+              <div class="column">
+                <img src="../assets/portfolio-6.png" alt="Fitness Trainer" class="portfolio-6"/>
+                <a href="/fitness/fitness-trainer" class="button is-primary">Book Demo</a>
+              </div>
+              <div class="column">
+                <img src="../assets/portfolio-7.png" alt="Class 10" class="portfolio-7"/>
+                <a href="/academics/10" class="button is-primary">Book Demo</a>
+              </div>
+              <div class="column">
+                <img src="../assets/portfolio-8.png" alt="Yoga" class="portfolio-8"/>
+                <a href="/fitness/yoga" class="button is-primary">Book Demo</a>
+              </div>
+            </div>
+          </div>
+          <div class="column empty-column"></div>
+        </div>
+        <div class="columns">
+          <div class="column empty-column"></div>
+          <div class="column is-10">
+            <div class="columns">
+              <div class="column">
+                <img src="../assets/portfolio-9.png" alt="Swimming" class="portfolio-9"/>
+                <a href="/sports/swimming" class="button is-primary">Book Demo</a>
+              </div>
+              <div class="column">
+                <img src="../assets/portfolio-10.png" alt="Pre-Primary" class="portfolio-10"/>
+                <a href="/academics/pre-primary" class="button is-primary">Book Demo</a>
+              </div>
+              <div class="column">
+                <img src="../assets/portfolio-11.png" alt="Martial Arts" class="portfolio-11"/>
+                <a href="/sports/martial-arts" class="button is-primary">Book Demo</a>
+              </div>
+              <div class="column">
+                <img src="../assets/portfolio-12.png" alt="Class 11 - Science" class="portfolio-12"/>
+                <a href="/academics/11-sci" class="button is-primary">Book Demo</a>
+              </div>
+            </div>
+          </div>
+          <div class="column empty-column"></div>
+        </div>
+      </div>
+
+      <div class="portfolio-category" v-if="portfolioCategory==='academics'">
+        <div class="columns">
+          <div class="column empty-column"></div>
+          <div class="column is-10">
+            <div class="columns">
+              <div class="column">
+                <img src="../assets/portfolio-4.png" alt="Class 6" class="portfolio-4"/>
+                <a href="/academics/6" class="button is-primary">Book Demo</a>
+              </div>
+              <div class="column">
+                <img src="../assets/portfolio-10.png" alt="Pre-Primary" class="portfolio-10"/>
+                <a href="/academics/pre-primary" class="button is-primary">Book Demo</a>
+              </div>
+              <div class="column">
+                <img src="../assets/portfolio-7.png" alt="Class 10" class="portfolio-7"/>
+                <a href="/academics/10" class="button is-primary">Book Demo</a>
+              </div>
+              <div class="column">
+                <img src="../assets/portfolio-12.png" alt="Class 11 - Science" class="portfolio-12"/>
+                <a href="/academics/11-sci" class="button is-primary">Book Demo</a>
+              </div>
+            </div>
+          </div>
+          <div class="column empty-column"></div>
+        </div>
+      </div>
+
+      <div class="portfolio-category" v-if="portfolioCategory==='sports'">
+        <div class="columns">
+          <div class="column empty-column"></div>
+          <div class="column is-10">
+            <div class="columns">
+              <div class="column">
+                <img src="../assets/portfolio-6.png" alt="Fitness Trainer" class="portfolio-6"/>
+                <a href="/fitness/fitness-trainer" class="button is-primary">Book Demo</a>
+              </div>
+              <div class="column">
+                <img src="../assets/portfolio-8.png" alt="Yoga" class="portfolio-8"/>
+                <a href="/fitness/yoga" class="button is-primary">Book Demo</a>
+              </div>
+              <div class="column">
+                <img src="../assets/portfolio-9.png" alt="Swimming" class="portfolio-9"/>
+                <a href="/sports/swimming" class="button is-primary">Book Demo</a>
+              </div>
+              <div class="column">
+                <img src="../assets/portfolio-11.png" alt="Martial Arts" class="portfolio-11"/>
+                <a href="/sports/martial-arts" class="button is-primary">Book Demo</a>
+              </div>
+            </div>
+          </div>
+          <div class="column empty-column"></div>
+        </div>
+      </div>
+
+      <div class="portfolio-category" v-if="portfolioCategory==='hobbies'">
+        <div class="columns">
+          <div class="column empty-column"></div>
+          <div class="column is-10">
+            <div class="columns">
+              <div class="column">
+                <img src="../assets/portfolio-1.png" alt="Art & Craft" class="portfolio-1"/>
+                <a href="/hobbies/art-craft" class="button is-primary">Book Demo</a>
+              </div>
+              <div class="column">
+                <img src="../assets/portfolio-2.png" alt="Guitar" class="portfolio-2"/>
+                <a href="/hobbies/guitar" class="button is-primary">Book Demo</a>
+              </div>
+              <div class="column">
+                <img src="../assets/portfolio-3.png" alt="Spoken English" class="portfolio-3"/>
+                <a href="/life-skills/speaking-english" class="button is-primary">Book Demo</a>
+              </div>
+              <div class="column">
+                <img src="../assets/portfolio-5.png" alt="Western Dance" class="portfolio-5"/>
+                <a href="/hobbies/western-dance" class="button is-primary">Book Demo</a>
+              </div>
+            </div>
+          </div>
+          <div class="column empty-column"></div>
+        </div>
+      </div>
+    </section>
   </div>
 </template>
 
@@ -238,6 +404,7 @@ export default {
     return {
       category: '',
       formLink: '',
+      portfolioCategory: 'all',
       form: {
         name: '',
         number: null
@@ -838,6 +1005,46 @@ div.number-three {
     width: 9%;
     top: 66%;
   }
+}
 
+/********************* Portfolio section starts here *********************/
+section.portfolio {
+  position: relative;
+}
+section.portfolio>div.container.has-text-centered {
+  padding-bottom: 2rem;
+}
+section.portfolio>div.portfolio-category>div>div.column.is-10 {
+  padding-bottom: 0rem;
+}
+section.portfolio>div.portfolio-category>div>div>div>div {
+  padding: 0rem;
+}
+section.portfolio>div.portfolio-category>div>div>div>div>img {
+  -webkit-transition: all 0.25s ease; /* Safari and Chrome */
+  -moz-transition: all 0.25s ease; /* Firefox */
+  -ms-transition: all 0.25s ease; /* IE 9 */
+  -o-transition: all 0.25s ease; /* Opera */
+  transition: all 0.25s ease;
+}
+section.portfolio>div.portfolio-category>div>div>div>div>a {
+  display: none;
+  top: -25%;
+}
+section.portfolio>div.portfolio-category>div>div>div>div:hover img {
+  -webkit-transform:scale(1.25); /* Safari and Chrome */
+  -moz-transform:scale(1.25); /* Firefox */
+  -ms-transform:scale(1.25); /* IE 9 */
+  -o-transform:scale(1.25); /* Opera */
+  transform:scale(1.25);
+}
+section.portfolio>div.portfolio-category>div>div>div>div:hover a {
+  display: block;
+}
+@media (max-width: 767px) {
+  section.portfolio>div.portfolio-category>div>div>div>div>img {
+    width: 60%;
+    margin-left: 20%;
+  }
 }
 </style>
