@@ -3,11 +3,11 @@
     <section class="top-image">
       <img src="../assets/top-image.png" alt="Banner Image" class="banner">
       <img src="../assets/top-image-vector.png" alt="Foreground" class="top-banner-vector">
-      <h1 class="has-text-weight-bold is-size-1">Book your own Tutor</h1>
+      <h1 class="has-text-weight-bold">Book your own Tutor</h1>
 
       <!-- First Dropdown -->
-      <div class="field category">
-        <div class="control">
+      <div class="field is-grouped">
+        <div class="control category">
           <b-select v-model="category" placeholder="Select category">
             <option value>Select Category</option>
             <option
@@ -19,11 +19,8 @@
             </option>
           </b-select>
         </div>
-      </div>
-
-      <!-- second dropdown -->
-      <div class="field standard">
-        <div class="control">
+        <!-- second dropdown -->
+        <div class="control standard">
           <b-select v-model="formLink" placeholder="Select category first">
             <option value>Select category First</option>
             <option
@@ -36,6 +33,7 @@
           </b-select>
         </div>
       </div>
+
       <b-button id="submit" tag="a" :href="formLink" class="is-success">Submit</b-button>
     </section>
 
@@ -43,7 +41,7 @@
     <section class="services">
       <div class="columns">
         <div class="column empty-column" />
-        <div class="column is-12">
+        <div class="column is-11">
           <div class="columns">
             <div class="column service-acads">
               <img src="../assets/1-acadmics-icon.png" width="43" height="44"><h2 class="has-text-weight-bold">Academics</h2>
@@ -630,129 +628,46 @@ section.top-image>h1 {
   top: 25%;
   left: 2%;
   color: white;
-
+  font-size: 5vw;
 }
-section.top-image>div.field.category {
+section.top-image>div.field.is-grouped {
   position: absolute;
   top: 39%;
   left: 2%;
-}
-section.top-image>div.field.standard {
-  position: absolute;
-  top: 39%;
-  left: 22%
 }
 section.top-image>a#submit {
   position: absolute;
   top: 48%;
   left: 2%
 }
-@media (max-width: 1024px) {
-  section.top-image>h1 {
-    top: 30%;
-    left: 5%;
-    color: white;
-
-  }
-  section.top-image>div.field.category {
-    top: 45%;
-    left: 5%;
-  }
-  section.top-image>div.field.standard {
-    top: 55%;
-    left: 5%
-  }
-  section.top-image>a#submit {
-    top: 50%;
-    left: 35%
+@media (max-width: 900px) {
+  section.top-image>img.top-banner-vector {
+    height: 63%;
+    left: 58%;
   }
 }
-@media (max-width: 900px) {
+@media (max-width: 767px) {
   section.top-image>img.top-banner-vector {
     display: none;
   }
   section.top-image>h1 {
-    top: 25%;
-    left: 10%;
-    color: white;
-
+    top: 20%;
+    font-size: 7vw;
   }
-  section.top-image>div.field.category {
-    top: 40%;
-    left: 10%;
-  }
-  section.top-image>div.field.standard {
+  section.top-image>a#submit {
     top: 50%;
-    left: 10%
-  }
-  section.top-image>a#submit {
-    top: 45%;
-    left: 45%
-  }
-}
-@media (max-width: 767px) {
-  section.top-image>h1 {
-    top: 15%;
-    color: white;
-
-  }
-  section.top-image>div.field.category {
-    left: 15%;
-  }
-  section.top-image>div.field.standard {
-    top: 55%;
-    left: 15%
-  }
-  section.top-image>a#submit {
-    left: 55%
   }
 }
 @media (max-width: 600px) {
-  section.top-image>img.banner {
-    display: none;
-  }
-  section.top-image {
-    background-color: #459bee;
-    height: 300px;
-  }
-  section.top-image>h1 {
-    top: 15%;
-    left: 5%;
-    color: white;
-
-  }
-  section.top-image>div.field.category {
-    top: 50%;
-    left: 15%;
-  }
-  section.top-image>div.field.standard {
-    top: 65%;
-    left: 15%
-  }
   section.top-image>a#submit {
-    top: 55%;
-    left: 70%
+    top: 53%;
   }
 }
-@media (max-width: 500px) {
-  section.top-image>div.field.category {
-    top: 65%;
-    left: 8%;
-  }
-  section.top-image>div.field.standard {
-    top: 80%;
-    left: 8%
-  }
-  section.top-image>a#submit {
-    top: 72%;
-    left: 70%
-  }
-}
-
 /******************* Services section starts here ***********************/
 section.services {
   position: relative;
-  padding: 50px 20px 30px;
+  padding-top: 50px;
+  padding-bottom: 30px;
 }
 div.service-acads, div.service-sports, div.service-hobbies {
   position: relative;
@@ -764,16 +679,48 @@ div.service-acads>img, div.service-sports>img, div.service-hobbies>img {
 }
 div.service-acads>h2, div.service-sports>h2, div.service-hobbies>h2 {
   position: absolute;
-  left: 20%;
+  left: 25%;
+  font-size: 2.25vw;
 }
 div.service-acads>ul, div.service-sports>ul, div.service-hobbies>ul {
   position: absolute;
   top: 30%;
   left: 5%;
+  font-size: 1.69vw;
 }
 @media (max-width: 767px) {
+  section.services {
+    padding-top: 25px;
+    padding-bottom: 25px;
+    text-align: center;
+  }
   div.service-acads, div.service-sports, div.service-hobbies {
-    height: 200px;
+    height: 225px;
+  }
+  div.service-acads>img {
+    left: 39%;
+  }
+  div.service-acads>h2 {
+    left: 49%;
+    font-size: 3.5vw;
+  }
+  div.service-sports>img {
+    left: 35%;
+  }
+  div.service-sports>h2 {
+    left: 45%;
+    font-size: 3.5vw;
+  }
+  div.service-hobbies>img {
+    left: 30%;
+  }
+  div.service-hobbies>h2 {
+    left: 40%;
+    font-size: 3.5vw;
+  }
+  div.service-acads>ul, div.service-sports>ul, div.service-hobbies>ul {
+    left: 28%;
+    font-size: 3vw;
   }
 }
 
@@ -786,6 +733,7 @@ section.why-us {
 }
 section.why-us>div.columns.first-row {
   padding-top: 10px;
+  padding-bottom: 10px;
 }
 section.why-us>div>div.column-why-us {
   position: relative;
@@ -798,10 +746,10 @@ section.why-us>div>div.column-why-us>img {
 }
 @media (max-width: 767px) {
   section.why-us>div>div.column-why-us {
-    padding: 10px 50px 10px 95px;
+    padding: 10px 50px 10px 150px;
   }
   section.why-us>div>div.column-why-us>img {
-    left: 3%;
+    left: 8%;
   }
 }
 /************************ Statistics section start here *************************/
@@ -815,9 +763,9 @@ section.stats>div>div {
 }
 section.stats>div>div>p.stat-number {
   position: absolute;
-  top: 38%;
+  top: 37%;
   left: 14%;
-  font-size: 1.5rem;
+  font-size: 2.5vw;
 }
 section.stats>div>div>p.stat-text {
   position: absolute;
@@ -831,13 +779,29 @@ section.stats>div>div>p.stat-text {
     padding-left: 25px;
   }
   section.stats>div>div>p.stat-number {
-    top: 40%;
+    font-size: 5vw;
     left: 15%;
-    font-size: 2rem;
   }
   section.stats>div>div>p.stat-text {
     font-size: 2rem;
     left: 45%;
+  }
+}
+@media (max-width: 550px) {
+  section.stats>div>div>p.stat-number {
+    font-size: 4.5vw;
+    left: 17%;
+  }
+}
+@media (max-width: 450px) {
+  section.stats>div>div>p.stat-number {
+    left: 18%;
+  }
+}
+@media (max-width: 400px) {
+  section.stats>div>div>p.stat-number {
+    font-size: 4vw;
+    left: 21%;
   }
 }
 /************************How it works section starts here************************/
