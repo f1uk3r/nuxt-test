@@ -1,7 +1,7 @@
 <template>
   <b-navbar :style="navbarColorObject">
     <template slot="brand">
-      <b-navbar-item>
+      <b-navbar-item tag="router-link" to="/">
         <img
           src="../assets/logo-side-edhusk.png"
           alt="EdHusk"
@@ -23,10 +23,8 @@
             <b-dropdown-item
               :key="index"
               aria-role="listitem"
-              tag="nuxt-link"
-              :to="eachStandard.link"
             >
-              {{ eachStandard.text }}
+              <a :href="eachStandard.link">{{ eachStandard.text }}</a>
             </b-dropdown-item>
           </template>
         </b-dropdown>
@@ -46,10 +44,8 @@
             <b-dropdown-item
               :key="index"
               aria-role="listitem"
-              tag="nuxt-link"
-              :to="eachSport.link"
             >
-              {{ eachSport.text }}
+              <a :href="eachSport.link">{{ eachSport.text }}</a>
             </b-dropdown-item>
           </template>
         </b-dropdown>
@@ -70,9 +66,8 @@
               :key="index"
               aria-role="listitem"
               tag="nuxt-link"
-              :to="eachHobbie.link"
             >
-              {{ eachHobbie.text }}
+              <a :href="eachHobbie.link">{{ eachHobbie.text }}</a>
             </b-dropdown-item>
           </template>
         </b-dropdown>
@@ -82,7 +77,7 @@
     <template slot="end">
       <b-navbar-item tag="div">
         <div class="buttons">
-          <a class="button is-success">
+          <a class="button is-success" href="/tutor/">
             <strong>Become a Tutor</strong>
           </a>
         </div>
