@@ -1,0 +1,1 @@
+__NUXT_JSONP__("/hobbies/western-instrument", {data:[{}],fetch:[],mutations:void 0});

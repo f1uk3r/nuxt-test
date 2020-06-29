@@ -1,0 +1,1 @@
+__NUXT_JSONP__("/sports/swimming", {data:[{}],fetch:[],mutations:void 0});

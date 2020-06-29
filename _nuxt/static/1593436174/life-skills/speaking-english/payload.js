@@ -1,0 +1,1 @@
+__NUXT_JSONP__("/life-skills/speaking-english", {data:[{}],fetch:[],mutations:void 0});

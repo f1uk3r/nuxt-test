@@ -1,0 +1,1 @@
+__NUXT_JSONP__("/hobbies/cooking", {data:[{}],fetch:[],mutations:void 0});

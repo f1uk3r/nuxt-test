@@ -1,0 +1,1 @@
+__NUXT_JSONP__("/academics/pre-primary", {data:[{}],fetch:[],mutations:void 0});

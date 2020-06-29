@@ -1,0 +1,1 @@
+__NUXT_JSONP__("/sports/volleyball", {data:[],fetch:[],mutations:void 0});

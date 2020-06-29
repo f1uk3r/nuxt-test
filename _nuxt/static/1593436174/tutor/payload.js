@@ -1,0 +1,1 @@
+__NUXT_JSONP__("/tutor", {data:[{}],fetch:[],mutations:void 0});
